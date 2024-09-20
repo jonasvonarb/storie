@@ -9,18 +9,18 @@ defineProps({
 
 <template>
   <div class="greetings">
-    <h1 class="green">{{ msg + 1 }}</h1>
+    <h1 class="green">{{ msg }}</h1>
     <h3>
       You’ve successfully created a project with
-      <a href="https://vitejs.dev/" target="_blank" rel="noopener">Vite</a> +
-      <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue 3</a>.
+      <a href="https://vitejs.dev/" target="_blank" rel="noopener">Hallo</a> +
+      <a href="https://vuejs.org/" target="_blank" rel="noopener">Tschüss</a>.
     </h3>
   </div>
 </template>
 
 <style scoped>
 h1 {
-  font-weight: 500;
+  font-weight: 300;
   font-size: 2.6rem;
   position: relative;
   top: -10px;
