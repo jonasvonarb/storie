@@ -22,6 +22,8 @@
     "eslint": "^8.57.0",
     "eslint-plugin-vue": "^9.23.0",
     "prettier": "^3.2.5",
+    "stylus": "^0.63.0",
+    "stylus-loader": "^8.1.1",
     "vite": "^5.3.1"
   }
 }

@@ -23,10 +23,11 @@ export const useApiStore = defineStore('apiCalls', () => {
         .then((res) => res.json())
         .then((res) => {
           let data = [res.data]
-          data.map((items) => {
-            Object.keys(items).map((item) => (responses.value[item] = items?.[item]))
-          })
-          console.log(responses.value)
+          console.log(id, data)
+          responses.value[id] = data
+          // data.map((items) => {
+          //   Object.keys(items).map((item) => (responses.value[item] = items?.[item]))
+          // })
         })
         .catch((error) => {
           console.log(error)
@@ -68,9 +69,6 @@ export const useApiStore = defineStore('apiCalls', () => {
         _modelApiKey
         id 
       }
-    }`,
-    tags: `
-    {
       allTagClients {
         id
         _modelApiKey
@@ -85,6 +83,14 @@ export const useApiStore = defineStore('apiCalls', () => {
         id
         _modelApiKey
         label
+      }
+    }`,
+    about: `
+    {
+      about {
+        aboutText
+        id
+        _modelApiKey
       }
     }`
   }
