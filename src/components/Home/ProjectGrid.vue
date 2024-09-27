@@ -1,6 +1,6 @@
 <template>
   <FilterMenu />
-  <StorieGrid type="projects" :items="28" />
+  <StorieGrid type="projects" :items="32" />
 </template>
 
 <script setup>

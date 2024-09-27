@@ -2,13 +2,6 @@
   <div ref="gridContainer" :class="['grid'].join(' ')">
     <div :class="['label'].join(' ')">This will be a {{ type }} Storie Grid</div>
     <div class="grid-item" v-for="(item, index) in _items" :key="index">{{ index + 1 }}</div>
-    <!-- <div
-      class="grid-item blank"
-      v-for="(item, index) of Array.from({ length: cartAmount - _items.length })"
-      :key="`Blane–${index}`"
-    >
-      {{ index + 1 }}
-    </div> -->
   </div>
 </template>
 
@@ -39,7 +32,6 @@ const gridContainer = ref(null)
 
 // Function to calculate and update the grid layout dynamically
 const updateGridSize = () => {
-  // const { width, height } = gridContainer.value.getBoundingClientRect()
   const width = window.innerWidth * 0.75
   const height = window.innerHeight
   const itemsCount = _items.value.length
@@ -74,10 +66,10 @@ onBeforeUnmount(() => {
   top 0
   right 0
   display: flex;
-  justify-content flex-end
+  justify-content flex-start
   flex-wrap wrap;
   width 75vw
-  // width: var(--containert-width);
+  width: var(--containert-width);
   margin 0
   // background-color #f3f3f3
   .label
