@@ -73,7 +73,7 @@ onBeforeUnmount(() => {
   position fixed
   top 0
   right 0
-  display: flex;
+  display flex
   justify-content flex-end
   flex-wrap wrap;
   width 75vw
@@ -105,4 +105,3 @@ onBeforeUnmount(() => {
   &.blank
     visibility hidden
 </style>
-742.688 1293.980
