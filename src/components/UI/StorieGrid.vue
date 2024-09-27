@@ -97,4 +97,3 @@ onBeforeUnmount(() => {
   &.blank
     visibility hidden
 </style>
-742.688 1293.980

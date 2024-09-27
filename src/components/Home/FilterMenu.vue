@@ -1,5 +1,11 @@
 <template>
-  <div>This Will be a Menu (Designed by Niklas &#129398;)</div>
+  
+
+<div v-for="text in responses.projekte[0].allTagClients" class="grid-item">
+  {{text.label}}
+</div>
+
+
 
   <div>
     {{ responses }}
@@ -12,17 +18,24 @@ import { watch } from 'vue'
 
 const { responses } = useApiStore()
 
+console.log("Test:", responses.projekte[0].allTagClients[2].label)
+
+
 // Watch for changes in responses
-watch(
-  responses,
-  (newVal, oldVal) => {
-    console.log(newVal, oldVal)
-    if (newVal !== oldVal) {
-      console.log('responses changed from', oldVal, 'to', newVal)
-    }
-  },
-  { deep: true }
-)
+// watch(
+//   responses,
+//   (newVal, oldVal) => {
+//     console.log(newVal, oldVal)
+//     if (newVal !== oldVal) {
+//       console.log('responses changed from', oldVal, 'to', newVal)
+//     }
+//   },
+//   { deep: true }
+// )
+
 </script>
 
-<style lang="stylus" scoped></style>
+<style lang="stylus" scoped>
+.grid-item
+  font-size: 1.5rem;
+</style>
