@@ -6,7 +6,7 @@ import Footer from 'UI/Footer.vue'
 import { useApiStore } from '@/stores'
 
 const apiStore = useApiStore()
-apiStore.call('projekte')
+apiStore.call('projects')
 </script>
 
 <template>

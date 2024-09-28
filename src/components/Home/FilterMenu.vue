@@ -1,14 +1,9 @@
 <template>
-  
-
-<div v-for="text in responses.projekte[0].allTagClients" class="grid-item">
-  {{text.label}}
-</div>
-
-
+  <div v-for="text in responses?.projects?.[0]?.allTagClients" class="grid-item">
+    {{ text.label }}
+  </div>
 
   <div>
-    {{ responses }}
   </div>
 </template>
 
@@ -18,8 +13,7 @@ import { watch } from 'vue'
 
 const { responses } = useApiStore()
 
-console.log("Test:", responses.projekte[0].allTagClients[2].label)
-
+// console.log('Test:', responses.projects[0].allTagClients[2].label)
 
 // Watch for changes in responses
 // watch(
@@ -32,7 +26,6 @@ console.log("Test:", responses.projekte[0].allTagClients[2].label)
 //   },
 //   { deep: true }
 // )
-
 </script>
 
 <style lang="stylus" scoped>

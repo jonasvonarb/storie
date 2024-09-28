@@ -1,12 +1,23 @@
 <template>
   <div ref="gridContainer" :class="['grid'].join(' ')">
-    <div :class="['label'].join(' ')">This will be a {{ type }} Storie Grid</div>
-    <div class="grid-item" v-for="(item, index) in _items" :key="index">{{ index + 1 }}</div>
+    <GridElement
+      v-for="(item, index) in _items"
+      :key="index"
+      :index="index"
+      :item="item"
+      :amount="_items.length"
+      :colAmount="colAmount"
+    />
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { ref, onMounted, onBeforeUnmount, watch } from 'vue'
+import GridElement from './Grid/GridElement.vue'
+import { useApiStore } from '@/stores'
+
+const { responses } = useApiStore()
+
 // Define the props
 const props = defineProps({
   type: {
@@ -22,7 +33,28 @@ const props = defineProps({
 })
 
 // Create a reactive array of items (example: 25 items)
-const _items = ref(Array.from({ length: props.items }))
+const _items = ref(Array.from({ length: 25 }))
+const makeUpperCase = (string) => string.charAt(0).toUpperCase() + string.slice(1)
+// Watch for changes in responses
+watch(
+  responses,
+  (newVal) => {
+    _items.value = newVal?.[`${props.type}`]
+      ? responses?.[`${props.type}`]?.[0]?.[`all${makeUpperCase(props.type)}`]
+      : Array.from({ length: props.items })
+    updateGridSize() // Initial call to set grid size on load
+  },
+  { deep: true }
+)
+
+watch(
+  _items,
+  (newVal) => {
+    updateGridSize() // Initial call to set grid size on load
+  },
+  { deep: true }
+)
+
 const rowAmount = ref(0)
 const colAmount = ref(0)
 const colAmountActual = ref(0)
@@ -78,22 +110,22 @@ onBeforeUnmount(() => {
     right 30px
 
 
-.grid-item
-  // border solid black 1px
-  // width var(--square-size-row);
-  height var(--square-size-row);
-  max-height 25vh
-  background-color: lightblue;
-  display: flex;
-  aspect-ratio: 1 / 1;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.5rem;
-  font-weight: bold;
-  flex-shrink: 0;
-  flex-grow: 0;
-  &:nth-child(2n)
-    background-color: lightcoral
-  &.blank
-    visibility hidden
+// .grid-item
+  // // border solid black 1px
+  // // width var(--square-size-row);
+  // height var(--square-size-row);
+  // max-height 25vh
+  // background-color: lightblue;
+  // display: flex;
+  // aspect-ratio: 1 / 1;
+  // justify-content: center;
+  // align-items: center;
+  // font-size: 1.5rem;
+  // font-weight: bold;
+  // flex-shrink: 0;
+  // flex-grow: 0;
+  // &:nth-child(2n)
+  //   background-color: lightcoral
+  // &.blank
+  //   visibility hidden
 </style>

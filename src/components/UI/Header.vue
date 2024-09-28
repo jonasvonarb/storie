@@ -1,7 +1,7 @@
 <template>
   <header>
     <h1>Storie</h1>
-    <h3>Kulturagentur</h3>
+    <h2>Kulturagentur</h2>
   </header>
 </template>
 

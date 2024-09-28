@@ -1,7 +1,6 @@
 <template>
   <div>This Will be the About Text (Designed by Niklas &#129398;)</div>
   <div>
-    {{ responses }}
   </div>
 </template>
 

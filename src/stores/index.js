@@ -63,32 +63,51 @@ export const useApiStore = defineStore('apiCalls', () => {
   }
 
   const querrys = {
-    projekte: `
-    {
-      projekte {
-        _modelApiKey
-        id 
-      }
-      allTagClients {
-        id
-        _modelApiKey
-        label
-      }
-       allTagProjectSorts {
-        id
-        _modelApiKey
-        label
-      }
-      allTagsProjectAreas {
-        id
-        _modelApiKey
-        label
-      }
-    }`,
+    projects: `
+      {
+        allProjects(first: 100) {
+          _modelApiKey
+          id
+          title
+          subTitle
+          text (markdown: true)
+          image {
+            id
+            responsiveImage {
+              alt
+              base64
+              bgColor
+              title
+              webpSrcSet
+              width
+              srcSet
+              src
+              sizes
+              height
+              aspectRatio
+            }
+          }
+        }
+        allTagClients {
+          id
+          _modelApiKey
+          label
+        }
+        allTagProjectSorts {
+          id
+          _modelApiKey
+          label
+        }
+        allTagsProjectAreas {
+          id
+          _modelApiKey
+          label
+        }
+      }`,
     about: `
     {
       about {
-        aboutText
+        aboutText (markdown: true)
         id
         _modelApiKey
       }
