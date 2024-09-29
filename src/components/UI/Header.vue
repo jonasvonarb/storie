@@ -7,4 +7,8 @@
 
 <script setup></script>
 
-<style scoped></style>
+<style lang="stylus" scoped>
+  h1
+    width 300px
+    // width clamp(300px, 30vw, 400px)
+</style>

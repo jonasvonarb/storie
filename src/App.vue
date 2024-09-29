@@ -6,13 +6,19 @@ import Footer from 'UI/Footer.vue'
 import { useApiStore } from '@/stores'
 
 const apiStore = useApiStore()
-apiStore.call('projects')
+apiStore.call('project')
 </script>
 
 <template>
   <Header />
-  <RouterView />
+  <main class="container">
+    <RouterView />
+  </main>
   <Footer />
 </template>
 
-<style scoped></style>
+<style lang="stylus" scoped>
+.container
+  height 1000%
+
+</style>

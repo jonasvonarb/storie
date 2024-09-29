@@ -23,11 +23,7 @@ export const useApiStore = defineStore('apiCalls', () => {
         .then((res) => res.json())
         .then((res) => {
           let data = [res.data]
-          console.log(id, data)
           responses.value[id] = data
-          // data.map((items) => {
-          //   Object.keys(items).map((item) => (responses.value[item] = items?.[item]))
-          // })
         })
         .catch((error) => {
           console.log(error)
@@ -63,7 +59,7 @@ export const useApiStore = defineStore('apiCalls', () => {
   }
 
   const querrys = {
-    projects: `
+    project: `
       {
         allProjects(first: 100) {
           _modelApiKey
@@ -106,6 +102,28 @@ export const useApiStore = defineStore('apiCalls', () => {
       }`,
     about: `
     {
+      allPeople{
+        _modelApiKey
+        id
+        title
+        text (markdown: true)
+        image {
+          id
+          responsiveImage {
+            alt
+            base64
+            bgColor
+            title
+            webpSrcSet
+            width
+            srcSet
+            src
+            sizes
+            height
+            aspectRatio
+          }
+        }
+      }
       about {
         aboutText (markdown: true)
         id

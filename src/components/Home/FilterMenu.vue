@@ -1,5 +1,5 @@
 <template>
-  <div v-for="text in responses?.projects?.[0]?.allTagClients" class="grid-item">
+  <div v-for="text in responses?.project?.[0]?.allTagClients" class="grid-item">
     {{ text.label }}
   </div>
 
@@ -13,7 +13,7 @@ import { watch } from 'vue'
 
 const { responses } = useApiStore()
 
-// console.log('Test:', responses.projects[0].allTagClients[2].label)
+// console.log('Test:', responses.project[0].allTagClients[2].label)
 
 // Watch for changes in responses
 // watch(
@@ -29,6 +29,4 @@ const { responses } = useApiStore()
 </script>
 
 <style lang="stylus" scoped>
-.grid-item
-  font-size: 1.5rem;
 </style>

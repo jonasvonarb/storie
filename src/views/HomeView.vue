@@ -1,9 +1,6 @@
 <template>
-  <main class="about">
-    <h1>This is the main page</h1>
-    <FilterMenu />
-    <StorieGrid type="projects" :items="32" />
-  </main>
+  <FilterMenu />
+  <StorieGrid type="project" p-key="allProjects" :items="32" key="projectsGrid" />
 </template>
 
 <script setup>
