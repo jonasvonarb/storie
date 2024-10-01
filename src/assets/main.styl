@@ -1,7 +1,11 @@
 :root
+  --containert-width calc(100vw - 300px)
+  
   --body-font-size: 1.3rem;
   --nav-font-size: 2.4rem;
   --logo-font-size: 4rem;
+
+  --header-height: 8rem;
 
 html
   font-size: 62.5%;
@@ -15,10 +19,16 @@ body
   line-height: 1.5;
   color: #333;
   margin: 0;
-  padding: 1rem;
-  overflow: hidden
-  height: 100vh;
+  padding: 0;
+  // overflow-y: scroll 
   width: 100vw;
+
+*
+  overscroll-behavior: none
+
+p
+  margin-block 0
+  margin-top 1rem
 
 ul
   padding-inline-start: 1.5rem;
@@ -29,7 +39,6 @@ ul
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%
   width: 100%;
 }
 

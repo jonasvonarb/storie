@@ -1,6 +1,6 @@
 <template>
-  <div>This Will be the About Text (Designed by Niklas &#129398;)</div>
-  <div>
+  <div class="container">
+    <div>This Will be the About Text (Designed by Niklas &#129398;)</div>
   </div>
 </template>
 
@@ -21,7 +21,7 @@ const { responses } = useApiStore()
 //   },
 //   { deep: true }
 // )
-
 </script>
 
-<style lang="stylues" scoped></style>
+<style lang="stylus" scoped>
+</style>

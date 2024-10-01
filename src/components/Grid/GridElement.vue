@@ -15,7 +15,10 @@
     </RouterLink>
     <div
       v-if="route.params.id === item.id"
-      :class="`info${colAmount - (index % colAmount) > (type === 'project' ? 3 : 2) ? ' left' : ' '}`"
+      :class="`info${
+        (colAmount - (index % colAmount) > (type === 'project' ? 3 : 2) ? ' ' : ' left') +
+        (Math.floor(index / rowAmount) < (type === 'project' ? rowAmount - 2 : 0) ? ' ' : ' top')
+      }`"
     >
       <h3>
         {{ item?.title }}
@@ -24,11 +27,13 @@
         {{ item?.subTitle }}
       </h4>
       <div class="text" v-html="item?.text" />
+      <RouterLink :to="`/${type}`" class="close"><CloseIcon /></RouterLink>
     </div>
   </div>
 </template>
 
 <script setup>
+import CloseIcon from '@/assets/icones/CloseIcon.vue'
 import { Image } from 'vue-datocms'
 
 import { RouterLink, useRoute } from 'vue-router'
@@ -52,6 +57,10 @@ const props = defineProps({
     type: Number,
     required: true
   },
+  rowAmount: {
+    type: Number,
+    required: true
+  },
   amount: {
     type: Number,
     required: true
@@ -69,7 +78,8 @@ const props = defineProps({
   align-items: center;
   flex-shrink: 0;
   flex-grow: 0;
-  a
+  padding .15rem
+  > a
     width 100%
     height 100%
     overflow hidden
@@ -79,22 +89,34 @@ const props = defineProps({
     opacity 0.05
   &.active
     .info
-      padding .5rem
-      padding-right 1.5rem
+      padding-left .5rem
+      padding-right 1rem
       z-index 1
       position absolute
       width calc(var(--square-size-row) * 3);
       top 0
-      left -300%
+      left 100%
       min-height 100%
       &.left
-        left 100%
+        left -300%
+      &.top
+        top unset
+        bottom 0%
+      // &.top
       .text
         hyphens auto
   &.about
     .info
       width calc(var(--square-size-row) * 2);
-      left -200%
+      left 100%
       &.left
-        left 100%
+        left -200%
+  .close
+    position absolute
+    top .3rem
+    right .5rem
+    color black
+    svg
+      height 1.5em
+      width 1.5em
 </style>

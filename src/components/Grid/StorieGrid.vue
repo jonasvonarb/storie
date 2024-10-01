@@ -7,14 +7,16 @@
       :item="item"
       :amount="_items.length"
       :colAmount="colAmount"
+      :rowAmount="rowAmount"
       :type="type"
+
     />
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted, onBeforeUnmount, watch } from 'vue'
-import GridElement from './Grid/GridElement.vue'
+import GridElement from './GridElement.vue'
 import { useApiStore } from '@/stores'
 
 const { responses } = useApiStore()
@@ -48,12 +50,6 @@ watch(
     _items.value = newVal[0]?.[`${newVal[1]}`]
       ? newVal[0]?.[`${newVal[1]}`]?.[0]?.[props.pKey]
       : Array.from({ length: props.items })
-
-    // if (_items.value?.length < 10) {
-    //   while (_items.value?.length < 10) {
-    //     _items.value.push(_items.value[0])
-    //   }
-    // }
     updateGridSize() // Initial call to set grid size on load
   },
   { deep: true }
@@ -83,8 +79,8 @@ const updateGridSize = () => {
   const cols = squareSizeActual * colAmount.value <= width ? colAmount.value : colAmountPlusOne
   // gridContainer.value.style.setProperty('--square-size-row', `${size}px`)
   // gridContainer.value.style.setProperty('--containert-width', `${size * cols}px`)
-  gridContainer.value.style.setProperty('--square-size-row', `${squareSizeActual}px`)
-  gridContainer.value.style.setProperty(
+  document.documentElement.style.setProperty('--square-size-row', `${squareSizeActual}px`)
+  document.documentElement.style.setProperty(
     '--containert-width',
     `${squareSizeActual * colAmount.value}px`
   )
@@ -99,6 +95,7 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
+  document.documentElement.style.setProperty('--containert-width', `calc(100vw - 300px)`)
   window.removeEventListener('resize', updateGridSize)
 })
 </script>
@@ -107,17 +104,16 @@ onBeforeUnmount(() => {
 
 .grid
   --img-aspect-ratio: 1
-  position fixed
-  top 0
-  right 0
+  position relative
   display: flex;
   justify-content flex-start
   align-content flex-start
   flex-wrap wrap;
   width 75vw
   height 100vh
-  width: calc(var(--containert-width) * var(--img-aspect-ratio));
   margin 0
+  // margin-left calc(100vw - var(--containert-width))
+  width: calc(var(--containert-width) * var(--img-aspect-ratio));
   &.about
     // width calc(100vw - 300px)
   .label

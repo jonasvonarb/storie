@@ -10,6 +10,12 @@ const router = createRouter({
       component: HomeView
     },
     {
+      path: '/list',
+      name: 'list',
+      component: HomeView,
+      children: [{ path: '/list/:id', component: HomeView }]
+    },
+    {
       path: '/project',
       name: 'project',
       component: HomeView,
@@ -23,7 +29,9 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue'),
-      children: [{ path: '/about/:id', component: () => import('../views/AboutView.vue') }]
+      children: [
+        { path: '/about/:id', component: () => import('../views/AboutView.vue') }
+      ]
     }
   ]
 })
