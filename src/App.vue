@@ -36,7 +36,7 @@ const route = useRoute()
   position relative
   .leftWrapper
     position sticky
-    background-color red
+    //background-color red
     top 0rem
     padding 1rem
     padding-top calc(1rem + var(--header-height))

@@ -1,6 +1,12 @@
 <template>
   <div class="container">
-    <div>This Will be the About Text (Designed by Niklas &#129398;)</div>
+    <div>
+      Wir beraten, organisieren und setzen um.
+      Wir erarbeiten Lösungen. Kreativ und pragmatisch,
+auf Augenhöhe mit unseren Projektpartner:innen.
+</div>
+
+
   </div>
 </template>
 
