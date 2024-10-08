@@ -4,6 +4,28 @@
       Wir beraten, organisieren und setzen um.
       Wir erarbeiten Lösungen. Kreativ und pragmatisch,
 auf Augenhöhe mit unseren Projektpartner:innen.
+
+<br>
+<br>
+
+Kulturgut
+<br>
+Wir ordnen Akten und dokumentieren Objekte. Im Auftrag von Museen, Archiven, NGOs, Unternehmen und Privaten.
+
+<br>
+<br>
+
+Vermittlung
+<br>
+Wir recherchieren, entwickeln Erzählungen und setzen Inhalte in Szene. Für Ausstellungen, Veranstaltungen und Publikationen.
+
+<br>
+<br>
+
+Betrieb
+<br>
+Wir evaluieren Bedürfnisse, definieren Vorgehensweisen und Kommunikationsstrategien, administrieren Betriebslösungen. Für Unternehmen, NGOs oder staatliche Institutionen.
+
 </div>
 
 
