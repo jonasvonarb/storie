@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "pinia": "^2.1.7",
+    "vite-plugin-html": "^3.2.2",
     "vue": "^3.4.29",
     "vue-datocms": "^7.0.5",
     "vue-router": "^4.3.3"
