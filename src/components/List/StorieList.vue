@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="list">
     <ul>
       <ListElement
         v-for="item in apiStore.responses?.[type]?.[0]?.[pKey]"
@@ -37,11 +37,19 @@ const props = defineProps({
 </script>
 
 <style lang="stylus" scoped>
-.container
+.list
   width calc(100vw - 300px)
   ul
     width 100%
     padding 0
     margin 0
     list-style-type: none;
+
+
+@media (max-width: 767px)
+  .list
+    width 100vw
+    height auto
+    min-height 100dvh
+    padding-top: calc(1rem);
 </style>

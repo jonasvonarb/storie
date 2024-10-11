@@ -9,7 +9,6 @@
       :colAmount="colAmount"
       :rowAmount="rowAmount"
       :type="type"
-
     />
   </div>
 </template>
@@ -112,7 +111,6 @@ onBeforeUnmount(() => {
   width 75vw
   height 100vh
   margin 0
-  // margin-left calc(100vw - var(--containert-width))
   width: calc(var(--containert-width) * var(--img-aspect-ratio));
   &.about
     // width calc(100vw - 300px)
@@ -121,27 +119,14 @@ onBeforeUnmount(() => {
     top 10px
     right 30px
 
+@media (max-width: 767px)
+  .grid
+    width 100vw
+    height auto
+    min-height 100dvh
+    padding-top: calc(1rem);
+
 @media (min-aspect-ratio: 16/7)
   .grid
     --img-aspect-ratio: 1.1
-
-
-// .grid-item
-  // // border solid black 1px
-  // // width var(--square-size-row);
-  // height var(--square-size-row);
-  // max-height 25vh
-  // background-color: lightblue;
-  // display: flex;
-  // aspect-ratio: 1 / 1;
-  // justify-content: center;
-  // align-items: center;
-  // font-size: 1.5rem;
-  // font-weight: bold;
-  // flex-shrink: 0;
-  // flex-grow: 0;
-  // &:nth-child(2n)
-  //   background-color: lightcoral
-  // &.blank
-  //   visibility hidden
 </style>

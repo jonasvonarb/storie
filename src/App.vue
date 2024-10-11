@@ -14,7 +14,7 @@ const route = useRoute()
 
 <template>
   <Header />
-  <main class="container">
+  <main class="mainContainer">
     <div class="leftWrapper">
       <FilterMenu
         v-if="
@@ -31,7 +31,7 @@ const route = useRoute()
 </template>
 
 <style lang="stylus" scoped>
-.container
+.mainContainer
   display flex
   position relative
   .leftWrapper
@@ -42,4 +42,11 @@ const route = useRoute()
     padding-top calc(1rem + var(--header-height))
     height 100vh
     width calc(100vw - var(--containert-width))
+
+@media (max-width: 767px)
+  .mainContainer
+    flex-direction column
+    .leftWrapper
+      width 100vw
+      height auto
 </style>

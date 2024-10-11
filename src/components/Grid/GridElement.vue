@@ -19,7 +19,7 @@
       v-if="route.params.id === item.id"
       :class="`info${
         (colAmount - (index % colAmount) > (type === 'project' ? 3 : 2) ? ' ' : ' left') +
-        (Math.floor(index / rowAmount) < (type === 'project' ? rowAmount - 2 : 0) ? ' ' : ' top')
+        (Math.ceil(index / colAmount) < (type === 'project' ? rowAmount - 2 : 0) ? ' ' : ' top')
       }`"
     >
       <h3>
@@ -128,4 +128,21 @@ const props = defineProps({
     svg
       height 1.5em
       width 1.5em
+
+@media (max-width: 767px)
+  .grid-item
+    width calc(100vw / 2)
+    height calc(100vw / 2)
+    background-color white
+    .info
+    .info.left
+    .info.top
+      position fixed
+      width 100vw
+      height auto
+      min-height unset
+      background-color white
+      top unset !important
+      bottom 0
+      left 0 !important
 </style>

@@ -7,7 +7,6 @@ export const useGeneral = defineStore('generalStore', () => {
   const toggleSelected = (tag) => {
     const type = tag._modelApiKey
     const id = tag.id
-    console.log(type)
     if (!selected.value[type]) selected.value[type] = []
     if (selected.value[type].includes(id)) {
       selected.value[type] = selected.value[type].filter((item) => item !== id)

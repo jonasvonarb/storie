@@ -84,4 +84,13 @@ li
       max-width 700px
       // background-color red
       // padding-top 2rem
+
+@media (max-width: 767px)
+  li
+    padding-inline 1rem
+    a
+      flex-direction column
+      gap 0
+      .title
+        font-weight bold
 </style>

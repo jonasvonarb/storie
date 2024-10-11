@@ -41,4 +41,14 @@ nav
     font-size var(--nav-font-size)
     &:hover
       text-decoration underline
+
+@media (max-width: 767px)
+  nav
+    flex-direction: column-reverse
+    top .5rem
+    right .5rem
+    left unset
+    bottom unset
+    a
+      text-align end
 </style>

@@ -3,34 +3,38 @@
     class="container"
     :class="route.params.id && route.matched?.[0]?.path === '/project' && 'inactive'"
   >
-    <div
-      v-for="bereich in responses?.project?.[0]?.allTagClients"
-      class="grid-item"
-      :class="getIsSelected(bereich) && ' active'"
-      :key="bereich.id"
-      @click="select(bereich)"
-    >
-      {{ bereich.label }}
+    <div class="filter-container">
+      <div
+        v-for="bereich in responses?.project?.[0]?.allTagClients"
+        class="grid-item"
+        :class="getIsSelected(bereich) && ' active'"
+        :key="bereich.id"
+        @click="select(bereich)"
+      >
+        {{ bereich.label }}
+      </div>
     </div>
-    <br />
-    <div
-      v-for="auftrag in responses?.project?.[0]?.allTagProjectSorts"
-      class="grid-item"
-      :class="getIsSelected(auftrag) && ' active'"
-      :key="auftrag.id"
-      @click="select(auftrag)"
-    >
-      {{ auftrag.label }}
+    <div class="filter-container">
+      <div
+        v-for="auftrag in responses?.project?.[0]?.allTagProjectSorts"
+        class="grid-item"
+        :class="getIsSelected(auftrag) && ' active'"
+        :key="auftrag.id"
+        @click="select(auftrag)"
+      >
+        {{ auftrag.label }}
+      </div>
     </div>
-    <br />
-    <div
-      v-for="tag in responses?.project?.[0]?.allTagsProjectAreas"
-      class="grid-item"
-      :class="getIsSelected(tag) && ' active'"
-      :key="tag.id"
-      @click="select(tag)"
-    >
-      {{ tag.label }}
+    <div class="filter-container">
+      <div
+        v-for="tag in responses?.project?.[0]?.allTagsProjectAreas"
+        class="grid-item"
+        :class="getIsSelected(tag) && ' active'"
+        :key="tag.id"
+        @click="select(tag)"
+      >
+        {{ tag.label }}
+      </div>
     </div>
   </div>
 
@@ -93,6 +97,7 @@ watch(
   width calc(100vw - var(--containert-width) - var(--padding))
   font-size 18px
   color black
+  gap 2rem
   &.inactive
     opacity 0.5
     pointer-events none
@@ -103,4 +108,15 @@ watch(
       background-color #f1f1f1
     &.active
       background-color red
+
+@media (max-width: 767px)
+  .container
+    width 100%
+    flex-direction row
+    display none
+    gap 1rem
+    .filter-container
+      width calc((100% - 1rem * 2 ) / 3 )
+      display flex
+      flex-direction column
 </style>
