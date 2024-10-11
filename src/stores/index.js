@@ -7,6 +7,7 @@ export const useGeneral = defineStore('generalStore', () => {
   const toggleSelected = (tag) => {
     const type = tag._modelApiKey
     const id = tag.id
+    console.log(type)
     if (!selected.value[type]) selected.value[type] = []
     if (selected.value[type].includes(id)) {
       selected.value[type] = selected.value[type].filter((item) => item !== id)
@@ -23,7 +24,6 @@ export const useGeneral = defineStore('generalStore', () => {
 
   const getIsFiltered = (record) => {
     if (!record?.tagAuftraggeber) return false
-    console.log(record)
     const clientIsSelected =
       record.tagAuftraggeber.some((item) => selected.value['tag_client']?.includes(item.id)) ||
       selected.value['tag_client']?.length === 0 ||
@@ -33,9 +33,11 @@ export const useGeneral = defineStore('generalStore', () => {
       selected.value['tag_project_sort']?.length === 0 ||
       !selected.value['tag_project_sort']
     const areaIsSelected =
-      record.tagProjektfeld.some((item) => selected.value['tag_project_area']?.includes(item.id)) ||
-      selected.value['tag_project_area']?.length === 0 ||
-      !selected.value['tag_project_area']
+      record.tagProjektfeld.some((item) =>
+        selected.value['tags_project_area']?.includes(item.id)
+      ) ||
+      selected.value['tags_project_area']?.length === 0 ||
+      !selected.value['tags_project_area']
     const isFiltered =
       (clientIsSelected && sortIsSelected && areaIsSelected) ||
       Object.values(selected.value || []).every((item) => item.length === 0)

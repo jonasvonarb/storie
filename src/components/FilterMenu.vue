@@ -77,7 +77,7 @@ watch(
   () => responses?.project,
   () => {
     if (responses?.project) {
-      console.log('responses?.project', responses?.project[0]) //watches for changes and "waits" for the data to be loaded
+      // console.log('responses?.project', responses?.project[0]) //watches for changes and "waits" for the data to be loaded
     }
   },
   { deep: true }

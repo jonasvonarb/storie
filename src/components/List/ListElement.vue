@@ -11,7 +11,7 @@
     <div class="info" v-if="route.params.id === item.id">
       <div class="tags">
         <template
-          v-for="(tags, i) in ['tagAuftraggeber', 'tagProjektfeld', 'tagProjektart']"
+          v-for="(tags, i) in ['tagAuftraggeber', 'tagProjektart', 'tagProjektfeld']"
           :key="tags"
         >
           <div class="tag-group">
@@ -70,7 +70,6 @@ li
     &.router-link-active
       font-weight bold
   .info
-    max-width 700px
     display flex
     flex-direction column
     padding-top 2rem
@@ -82,6 +81,7 @@ li
       .tag-group
         display flex
     .text
+      max-width 700px
       // background-color red
       // padding-top 2rem
 </style>
