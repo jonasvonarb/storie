@@ -57,7 +57,7 @@ Gescheiterter Versuch für einen nested Loop von Niklas feat. ChatGPT
 
 <script setup>
 import { useApiStore, useGeneral } from '@/stores'
-import { ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 const { responses } = useApiStore()
 
@@ -67,8 +67,18 @@ function select(tag) {
   console.log('tag', tag)
   toggleSelected(tag)
 }
-console.log('Test:', responses)
-console.log('Test:', responses?.project[0])
+
+watch(
+  () => responses?.project,
+  () => {
+    if (responses?.project) {
+      console.log('responses?.project', responses?.project[0]) //watches for changes and "waits" for the data to be loaded
+    }
+  },
+  { deep: true }
+)
+
+// console.log('Test:', responses?.project[0])
 </script>
 
 <style lang="stylus" scoped>
