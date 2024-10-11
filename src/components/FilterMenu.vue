@@ -30,7 +30,30 @@
       {{ tag.label }}
     </div>
   </div>
-</template>
+
+  <!--
+
+Gescheiterter Versuch für einen nested Loop von Niklas feat. ChatGPT
+
+<ul>
+  <li v-for="bereich in responses?.project" class="grid-item" :key="bereich.id">
+    {{ bereich.label }}
+    
+    <ul>
+      <li v-for="auftrag in bereich.tags" class="grid-item" :key="auftrag.id">
+        {{ auftrag.label }}
+        
+        <ul>
+          <li v-for="tag in auftrag.tags" class="grid-item" :key="tag.id">
+            {{ tag.label }}
+          </li>
+        </ul>
+        
+      </li>
+    </ul>
+  </li>
+</ul>
+--></template>
 
 <script setup>
 import { useApiStore, useGeneral } from '@/stores'
@@ -44,6 +67,8 @@ function select(tag) {
   console.log('tag', tag)
   toggleSelected(tag)
 }
+console.log('Test:', responses)
+console.log('Test:', responses?.project[0])
 </script>
 
 <style lang="stylus" scoped>
