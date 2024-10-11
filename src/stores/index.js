@@ -23,16 +23,7 @@ export const useGeneral = defineStore('generalStore', () => {
 
   const getIsFiltered = (record) => {
     if (!record?.tagAuftraggeber) return false
-    // const filters = [
-    //   ...record.tagAuftraggeber.map((item) => item.id),
-    //   ...record.tagProjektart.map((item) => item.id),
-    //   ...record.tagProjektfeld.map((item) => item.id)
-    // ]
-
-    // console.log(selected.value['tag_client'])
-    // console.log(selected.value['tag_project_sort'])
-    // console.log(selected.value['tag_project_area'])
-
+    console.log(record)
     const clientIsSelected =
       record.tagAuftraggeber.some((item) => selected.value['tag_client']?.includes(item.id)) ||
       selected.value['tag_client']?.length === 0 ||
@@ -45,7 +36,6 @@ export const useGeneral = defineStore('generalStore', () => {
       record.tagProjektfeld.some((item) => selected.value['tag_project_area']?.includes(item.id)) ||
       selected.value['tag_project_area']?.length === 0 ||
       !selected.value['tag_project_area']
-    console.log(clientIsSelected, sortIsSelected, areaIsSelected)
     const isFiltered =
       (clientIsSelected && sortIsSelected && areaIsSelected) ||
       Object.values(selected.value || []).every((item) => item.length === 0)
@@ -139,14 +129,17 @@ export const useApiStore = defineStore('apiCalls', () => {
           }
           tagAuftraggeber {
             id
+            label
             _modelApiKey
           }
           tagProjektart {
             id
+            label
             _modelApiKey
           }
           tagProjektfeld {
             id
+            label
             _modelApiKey
           }
         }

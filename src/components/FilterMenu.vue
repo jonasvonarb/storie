@@ -1,5 +1,8 @@
 <template>
-  <div class="container">
+  <div
+    class="container"
+    :class="route.params.id && route.matched?.[0]?.path === '/project' && 'inactive'"
+  >
     <div
       v-for="bereich in responses?.project?.[0]?.allTagClients"
       class="grid-item"
@@ -57,14 +60,16 @@ Gescheiterter Versuch für einen nested Loop von Niklas feat. ChatGPT
 
 <script setup>
 import { useApiStore, useGeneral } from '@/stores'
-import { computed, ref, watch } from 'vue'
+import { watch } from 'vue'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
 
 const { responses } = useApiStore()
 
 const { selected, toggleSelected, getIsSelected } = useGeneral()
 
 function select(tag) {
-  console.log('tag', tag)
   toggleSelected(tag)
 }
 
@@ -88,6 +93,9 @@ watch(
   width calc(100vw - var(--containert-width) - var(--padding))
   font-size 18px
   color black
+  &.inactive
+    opacity 0.5
+    pointer-events none
   .grid-item
     cursor pointer
     display flex

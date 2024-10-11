@@ -2,11 +2,11 @@
   <div
     :class="`${
       route.params.id === item.id ? 'active ' : route.params.id ? 'inActive ' : ' '
-    }${type} ${getIsFiltered(item) ? '' : 'filtered'} grid-item`"
+    }${type} ${getIsFiltered(item) || type !== 'project' ? '' : 'filtered'} grid-item`"
   >
     <RouterLink
       :to="
-        !route.params.id
+        !route.params.id && (getIsFiltered(item) || type !== 'project')
           ? type === 'project'
             ? `/project/${item?.id}`
             : `/about/${item?.id}`
@@ -91,7 +91,7 @@ const props = defineProps({
   &.blank
     visibility hidden
   &.filtered
-    pointer-events none
+    // pointer-events none
   &.filtered
     opacity 0.1
   &.inActive

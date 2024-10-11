@@ -1,5 +1,5 @@
 <template>
-  <li>
+  <li :class="!getIsFiltered(item) && 'filtered'">
     <RouterLink :to="route.params.id !== item.id ? `/list/${item.id}` : '/list'">
       <div class="title">
         {{ item.title }}
@@ -8,7 +8,29 @@
         {{ item.subTitle }}
       </div>
     </RouterLink>
-    <div class="text" v-if="route.params.id === item.id" v-html="item.text" />
+    <div class="info" v-if="route.params.id === item.id">
+      <div class="tags">
+        <template
+          v-for="(tags, i) in ['tagAuftraggeber', 'tagProjektfeld', 'tagProjektart']"
+          :key="tags"
+        >
+          <div class="tag-group">
+            <Tag
+              v-for="(tag, index) in item?.[tags]"
+              :key="tag?.id + '_listTag'"
+              :tag="tag"
+              :index="index"
+              :length="item?.[tags].length"
+              :last="item?.[tags].length !== index + 1"
+            />
+          </div>
+          <div v-if="i !== 2">
+            {{ '-' }}
+          </div>
+        </template>
+      </div>
+      <div class="text" v-html="item.text" />
+    </div>
   </li>
 </template>
 
@@ -16,8 +38,10 @@
 import { useGeneral } from '@/stores'
 import { useRoute, RouterLink } from 'vue-router'
 
+import Tag from '@/components/List/Tag.vue'
+
 const route = useRoute()
-const { selected } = useGeneral()
+const { getIsFiltered } = useGeneral()
 
 const props = defineProps({
   item: {
@@ -32,6 +56,9 @@ const props = defineProps({
 li
   padding-block .5rem
   border-bottom 1px solid black
+  &.filtered
+    opacity 0.05
+    pointer-events none
   a
     display flex
     gap 1rem
@@ -42,7 +69,19 @@ li
       flex-shrink 0
     &.router-link-active
       font-weight bold
-  .text
-    padding-top 2rem
+  .info
     max-width 700px
+    display flex
+    flex-direction column
+    padding-top 2rem
+    .tags
+      display flex
+      gap 1em
+      font-family: monospace;
+      font-size .75em
+      .tag-group
+        display flex
+    .text
+      // background-color red
+      // padding-top 2rem
 </style>
