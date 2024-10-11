@@ -1,6 +1,8 @@
 <template>
   <div
-    :class="`${route.params.id === item.id ? 'active ' : route.params.id ? 'inActive ' : ' '}${type} grid-item`"
+    :class="`${
+      route.params.id === item.id ? 'active ' : route.params.id ? 'inActive ' : ' '
+    }${type} ${getIsFiltered(item) ? '' : 'filtered'} grid-item`"
   >
     <RouterLink
       :to="
@@ -34,10 +36,13 @@
 
 <script setup>
 import CloseIcon from '@/assets/icones/CloseIcon.vue'
+import { useGeneral } from '@/stores'
 import { Image } from 'vue-datocms'
 
 import { RouterLink, useRoute } from 'vue-router'
 const route = useRoute()
+
+const { getIsFiltered } = useGeneral()
 
 const props = defineProps({
   index: {
@@ -85,8 +90,12 @@ const props = defineProps({
     overflow hidden
   &.blank
     visibility hidden
+  &.filtered
+    pointer-events none
+  &.filtered
+    opacity 0.1
   &.inActive
-    opacity 0.05
+    opacity 0.02
   &.active
     .info
       padding-left .5rem

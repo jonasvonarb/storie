@@ -1,6 +1,60 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 
+export const useGeneral = defineStore('generalStore', () => {
+  const selected = ref([])
+
+  const toggleSelected = (tag) => {
+    const type = tag._modelApiKey
+    const id = tag.id
+    if (!selected.value[type]) selected.value[type] = []
+    if (selected.value[type].includes(id)) {
+      selected.value[type] = selected.value[type].filter((item) => item !== id)
+    } else {
+      selected.value[type].push(id)
+    }
+  }
+
+  const getIsSelected = (record) => {
+    const type = record._modelApiKey
+    const id = record.id
+    return selected.value[type]?.includes(id)
+  }
+
+  const getIsFiltered = (record) => {
+    if (!record?.tagAuftraggeber) return false
+    // const filters = [
+    //   ...record.tagAuftraggeber.map((item) => item.id),
+    //   ...record.tagProjektart.map((item) => item.id),
+    //   ...record.tagProjektfeld.map((item) => item.id)
+    // ]
+
+    // console.log(selected.value['tag_client'])
+    // console.log(selected.value['tag_project_sort'])
+    // console.log(selected.value['tag_project_area'])
+
+    const clientIsSelected =
+      record.tagAuftraggeber.some((item) => selected.value['tag_client']?.includes(item.id)) ||
+      selected.value['tag_client']?.length === 0 ||
+      !selected.value['tag_client']
+    const sortIsSelected =
+      record.tagProjektart.some((item) => selected.value['tag_project_sort']?.includes(item.id)) ||
+      selected.value['tag_project_sort']?.length === 0 ||
+      !selected.value['tag_project_sort']
+    const areaIsSelected =
+      record.tagProjektfeld.some((item) => selected.value['tag_project_area']?.includes(item.id)) ||
+      selected.value['tag_project_area']?.length === 0 ||
+      !selected.value['tag_project_area']
+    console.log(clientIsSelected, sortIsSelected, areaIsSelected)
+    const isFiltered =
+      (clientIsSelected && sortIsSelected && areaIsSelected) ||
+      Object.values(selected.value || []).every((item) => item.length === 0)
+    return isFiltered
+  }
+
+  return { selected, toggleSelected, getIsSelected, getIsFiltered }
+})
+
 export const useApiStore = defineStore('apiCalls', () => {
   const responses = ref({})
   const lottie = ref(0)
@@ -82,6 +136,18 @@ export const useApiStore = defineStore('apiCalls', () => {
               height
               aspectRatio
             }
+          }
+          tagAuftraggeber {
+            id
+            _modelApiKey
+          }
+          tagProjektart {
+            id
+            _modelApiKey
+          }
+          tagProjektfeld {
+            id
+            _modelApiKey
           }
         }
         allTagClients {

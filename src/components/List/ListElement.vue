@@ -1,8 +1,6 @@
 <template>
   <li>
-    <RouterLink
-      :to="route.params.id !== item.id ? `/list/${item.id}` : '/list'"
-    >
+    <RouterLink :to="route.params.id !== item.id ? `/list/${item.id}` : '/list'">
       <div class="title">
         {{ item.title }}
       </div>
@@ -15,9 +13,11 @@
 </template>
 
 <script setup>
+import { useGeneral } from '@/stores'
 import { useRoute, RouterLink } from 'vue-router'
 
 const route = useRoute()
+const { selected } = useGeneral()
 
 const props = defineProps({
   item: {

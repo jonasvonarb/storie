@@ -1,12 +1,11 @@
 <template>
   <div class="container">
-    {{ selected }}
     <div
       v-for="bereich in responses?.project?.[0]?.allTagClients"
       class="grid-item"
-      :class="selected.includes(bereich.id) && ' active'"
+      :class="getIsSelected(bereich) && ' active'"
       :key="bereich.id"
-      @click="select(bereich.id)"
+      @click="select(bereich)"
     >
       {{ bereich.label }}
     </div>
@@ -14,9 +13,9 @@
     <div
       v-for="auftrag in responses?.project?.[0]?.allTagProjectSorts"
       class="grid-item"
-      :class="selected.includes(auftrag.id) && ' active'"
+      :class="getIsSelected(auftrag) && ' active'"
       :key="auftrag.id"
-      @click="select(auftrag.id)"
+      @click="select(auftrag)"
     >
       {{ auftrag.label }}
     </div>
@@ -24,9 +23,9 @@
     <div
       v-for="tag in responses?.project?.[0]?.allTagsProjectAreas"
       class="grid-item"
-      :class="selected.includes(tag.id) && ' active'"
+      :class="getIsSelected(tag) && ' active'"
       :key="tag.id"
-      @click="select(tag.id)"
+      @click="select(tag)"
     >
       {{ tag.label }}
     </div>
@@ -34,18 +33,17 @@
 </template>
 
 <script setup>
-import { useApiStore } from '@/stores'
+import { useApiStore, useGeneral } from '@/stores'
 import { ref } from 'vue'
 
 const { responses } = useApiStore()
 
-const selected = ref([])
+const { selected, toggleSelected, getIsSelected } = useGeneral()
 
-function select(id) {
-  selected.value.push(id)
+function select(tag) {
+  console.log('tag', tag)
+  toggleSelected(tag)
 }
-
-//console.log('Test:', responses)
 </script>
 
 <style lang="stylus" scoped>
@@ -55,7 +53,11 @@ function select(id) {
   width calc(100vw - var(--containert-width) - var(--padding))
   font-size 18px
   color black
-
-.active
-  background-color red
+  .grid-item
+    cursor pointer
+    display flex
+    &:hover
+      background-color #f1f1f1
+    &.active
+      background-color red
 </style>
