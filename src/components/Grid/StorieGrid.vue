@@ -5,7 +5,7 @@
       :key="index"
       :index="index"
       :item="item"
-      :amount="_items.length"
+      :amount="Math.max(_items.length, 15)"
       :colAmount="colAmount"
       :rowAmount="rowAmount"
       :type="type"
@@ -14,11 +14,16 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount, watch } from 'vue'
+import { ref, onMounted, onBeforeUnmount, watch, computed } from 'vue'
 import GridElement from './GridElement.vue'
 import { useApiStore } from '@/stores'
+import { useHead } from 'unhead'
 
 const { responses } = useApiStore()
+
+import { useRoute } from 'vue-router'
+import { useSeoMeta } from '@unhead/vue'
+const route = useRoute()
 
 // Define the props
 const props = defineProps({
@@ -64,20 +69,12 @@ const updateGridSize = () => {
   if (!_items.value) return
   const width = window.innerWidth - 300
   const height = window.innerHeight
-  const itemsCount = Math.ceil(_items.value.length * (props.type === 'about' ? 1.5 : 1))
+  const itemsCount = Math.ceil(Math.max(_items.value.length, 15))
   // Calculate the square size based on the number of items (+ Math.sqrt(itemsCount) -> ajusting for the ceils in squarsize and rowAmount)
   const squareSize = Math.sqrt((height * width) / itemsCount)
   rowAmount.value = Math.ceil(height / squareSize)
-  const rowAmountPlusOne = Math.ceil(height / squareSize) + 1
   colAmount.value = Math.ceil(itemsCount / rowAmount.value)
-  const colAmountPlusOne = Math.ceil(itemsCount / rowAmountPlusOne)
   const squareSizeActual = height / rowAmount.value
-  const squareSizeActualPlusOne = height / rowAmountPlusOne
-  const size =
-    squareSizeActual * colAmount.value <= width ? squareSizeActual : squareSizeActualPlusOne
-  const cols = squareSizeActual * colAmount.value <= width ? colAmount.value : colAmountPlusOne
-  // gridContainer.value.style.setProperty('--square-size-row', `${size}px`)
-  // gridContainer.value.style.setProperty('--containert-width', `${size * cols}px`)
   document.documentElement.style.setProperty('--square-size-row', `${squareSizeActual}px`)
   document.documentElement.style.setProperty(
     '--containert-width',
@@ -96,6 +93,51 @@ onMounted(() => {
 onBeforeUnmount(() => {
   document.documentElement.style.setProperty('--containert-width', `calc(100vw - 300px)`)
   window.removeEventListener('resize', updateGridSize)
+})
+
+const info = ref({
+  title: 'Storie',
+  description: 'Storie'
+})
+
+const headTitle = computed(() => `${info.value?.title}`)
+
+// Watcher for route changes
+watch(
+  () => [route.params?.id, _items.value],
+  (newData, oldData) => {
+    if (!_items.value) return
+    const item = _items.value?.find((item) => route.params?.id === item?.id)
+    const title = item ? `Storie - ${item.title}` : undefined
+    info.value = {
+      title: title || 'Storie',
+      description: 'test'
+    }
+  },
+  { immediate: true, deep: true }
+)
+
+useHead({
+  // htmlAttrs,
+  title: headTitle
+})
+useSeoMeta({
+  charset: 'utf-8',
+  title: headTitle,
+  ogImage: 'https://storie.ch/preview.png',
+  twitterImage: 'https://storie.ch/preview.png'
+  // robots: headIndex,
+  // ogDescription: headDescription,
+  // description: headDescription,
+  // ogLocale: locale,
+  // ogType: "website",
+  // ogTitle: headTitle,
+  // ogUrl: ogUrl,
+  // twitterCard: "summary_large_image",
+  // twitterDomain: import.meta.env.VITE_APP_storie_Ch,
+  // twitterUrl: ogUrl,
+  // twitterTitle: headTitle,
+  // twitterDescription: headDescription,
 })
 </script>
 

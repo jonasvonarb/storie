@@ -19,7 +19,7 @@
       v-if="route.params.id === item.id"
       :class="`info${
         (colAmount - (index % colAmount) > (type === 'project' ? 3 : 2) ? ' ' : ' left') +
-        (Math.ceil(index / colAmount) < (type === 'project' ? rowAmount - 2 : 0) ? ' ' : ' top')
+        (Math.ceil(index / colAmount) < rowAmount - 2 ? ' ' : ' top')
       }`"
     >
       <h3>

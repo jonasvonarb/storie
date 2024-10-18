@@ -7,6 +7,12 @@ import { useApiStore } from '@/stores'
 import AbouText from './components/AbouText.vue'
 import FilterMenu from './components/FilterMenu.vue'
 
+import { useHead } from '@unhead/vue'
+
+useHead({
+  title: 'Storie'
+})
+
 const apiStore = useApiStore()
 apiStore.call('project')
 const route = useRoute()

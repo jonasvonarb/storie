@@ -5,10 +5,15 @@
 <script setup>
 import { useApiStore } from '@/stores'
 import { onMounted } from 'vue'
+import { useHead } from '@unhead/vue'
 
 import StorieGrid from '@/components/Grid/StorieGrid.vue'
 
 const { call } = useApiStore()
+
+useHead({
+  title: 'Über Uns – Storie'
+})
 
 onMounted(() => {
   call('about')

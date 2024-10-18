@@ -12,9 +12,14 @@
 <script setup>
 import StorieGrid from '@/components/Grid/StorieGrid.vue'
 import StorieList from '@/components/List/StorieList.vue'
+import { useHead } from '@unhead/vue'
 
 import { useRoute } from 'vue-router'
 const route = useRoute()
+
+useHead({
+  title: 'Storie'
+})
 </script>
 
 <style scoped lang="stylus"></style>
