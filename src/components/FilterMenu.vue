@@ -106,8 +106,6 @@ watch(
     display flex
     &:hover
       background-color #f1f1f1
-    &.active
-      background-color red
 
 @media (max-width: 767px)
   .container

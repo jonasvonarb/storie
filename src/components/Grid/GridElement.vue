@@ -16,7 +16,7 @@
       <Image v-if="item?.image" :data="item?.image?.responsiveImage" />
     </RouterLink>
     <div
-      v-if="route.params.id === item.id"
+      v-if="route.params.id === item.id && item?.title"
       :class="`info${
         (colAmount - (index % colAmount) > (type === 'project' ? 3 : 2) ? ' ' : ' left') +
         (Math.ceil(index / colAmount) < rowAmount - 2 ? ' ' : ' top')
@@ -84,7 +84,9 @@ const props = defineProps({
   flex-shrink: 0;
   flex-grow: 0;
   padding .15rem
+  cursor pointer
   > a
+    cursor inherit
     width 100%
     height 100%
     overflow hidden
@@ -93,8 +95,10 @@ const props = defineProps({
   &.filtered
     // pointer-events none
   &.filtered
+    cursor default
     opacity 0.1
   &.inActive
+    cursor default
     opacity 0.02
   &.active
     .info
