@@ -20,4 +20,12 @@ header
     text-decoration none
     h1
       width var(--container-width)
+
+@media (max-width: 767px)
+  header
+    top 0
+    left 0px
+    padding 1rem
+    width 100vw
+    background-color white
 </style>

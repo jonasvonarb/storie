@@ -138,15 +138,16 @@ const props = defineProps({
     width calc(100vw / 2)
     height calc(100vw / 2)
     background-color white
+    position relative
     .info
     .info.left
     .info.top
-      position fixed
+      position absolute
       width 100vw
       height auto
       min-height unset
       background-color white
-      top unset !important
+      top 100% !important
       bottom 0
       left 0 !important
 </style>

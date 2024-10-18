@@ -166,7 +166,9 @@ useSeoMeta({
     width 100vw
     height auto
     min-height 100dvh
-    padding-top: calc(1rem);
+    background-color white
+    // padding-top: calc(1rem);
+    padding-bottom 50vh
 
 @media (min-aspect-ratio: 16/7)
   .grid

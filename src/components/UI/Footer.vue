@@ -49,6 +49,7 @@ nav
     right .5rem
     left unset
     bottom unset
+    z-index 10
     a
       text-align end
 </style>
