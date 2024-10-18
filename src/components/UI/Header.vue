@@ -1,8 +1,7 @@
 <template>
   <header>
     <RouterLink to="/">
-      <h1>Storie</h1>
-      <h2>Kulturagentur</h2>
+      <img src="/src/assets/logo.svg">
     </RouterLink>
   </header>
 </template>
@@ -13,13 +12,16 @@
 header
   position fixed
   z-index 10
-  top 1rem
-  left 1rem
+  height 10px
+  left 10px
+  top 0rem
+  left 0rem
   a
     color black
     text-decoration none
-    h1
-      width var(--container-width)
+    width 100%
+    img
+      width 200px
 
 @media (max-width: 767px)
   header

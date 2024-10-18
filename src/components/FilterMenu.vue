@@ -3,31 +3,9 @@
     class="container"
     :class="route.params.id && route.matched?.[0]?.path === '/project' && 'inactive'"
   >
-    <div class="filter-container">
+    <div v-for="type in ['allTagsProjectAreas', 'allTagProjectSorts', 'allTagClients']"class="filter-container">
       <div
-        v-for="bereich in responses?.project?.[0]?.allTagClients"
-        class="grid-item"
-        :class="getIsSelected(bereich) && ' active'"
-        :key="bereich.id"
-        @click="select(bereich)"
-      >
-        {{ bereich.label }}
-      </div>
-    </div>
-    <div class="filter-container">
-      <div
-        v-for="auftrag in responses?.project?.[0]?.allTagProjectSorts"
-        class="grid-item"
-        :class="getIsSelected(auftrag) && ' active'"
-        :key="auftrag.id"
-        @click="select(auftrag)"
-      >
-        {{ auftrag.label }}
-      </div>
-    </div>
-    <div class="filter-container">
-      <div
-        v-for="tag in responses?.project?.[0]?.allTagsProjectAreas"
+        v-for="tag in responses?.project?.[0]?.[type]"
         class="grid-item"
         :class="getIsSelected(tag) && ' active'"
         :key="tag.id"
