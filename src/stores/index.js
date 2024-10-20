@@ -1,8 +1,10 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
+import { unique } from '@/helpers'
 
 export const useGeneral = defineStore('generalStore', () => {
   const selected = ref([])
+  const selectedAll = ref([])
 
   const toggleSelected = (tag) => {
     const type = tag._modelApiKey
@@ -13,6 +15,12 @@ export const useGeneral = defineStore('generalStore', () => {
     } else {
       selected.value[type].push(id)
     }
+    if (selectedAll.value.includes(id)) {
+      selectedAll.value = selectedAll.value.filter((item) => item !== id)
+    } else {
+      const newArray = [...selectedAll.value, id]
+      selectedAll.value = newArray
+    }
   }
 
   const getIsSelected = (record) => {
@@ -20,30 +28,58 @@ export const useGeneral = defineStore('generalStore', () => {
     const id = record.id
     return selected.value[type]?.includes(id)
   }
+  const getChoosables = (projects) => {
+    const filteredProjects = projects.filter((project) => {
+      return getIsFiltered(project) ? project : null
+    })
+
+    const tags = filteredProjects.reduce((arr, project) => {
+      const _tags = [
+        ...project.tagAuftraggeber.map((item) => item.id),
+        ...project.tagProjektart.map((item) => item.id),
+        ...project.tagProjektfeld.map((item) => item.id)
+      ]
+      // const isChoosable = tags.includes(tag.id)
+      return (arr = [...arr, ..._tags])
+    }, [])
+
+    // var uniques = (tags || []).unique()
+    console.log('tags', unique(tags))
+    return unique(tags)
+  }
+
+  //   const getIsFiltered = (record) => {
+  //     if (!record?.tagAuftraggeber) return false
+  //     const clientIsSelected =
+  //       record.tagAuftraggeber.some((item) => selected.value['tag_client']?.includes(item.id)) ||
+  //       selected.value['tag_client']?.length === 0 ||
+  //       !selected.value['tag_client']
+  //     const sortIsSelected =
+  //       record.tagProjektart.some((item) => selected.value['tag_project_sort']?.includes(item.id)) ||
+  //       selected.value['tag_project_sort']?.length === 0 ||
+  //       !selected.value['tag_project_sort']
+  //     const areaIsSelected =
+  //       record.tagProjektfeld.some((item) =>
+  //         selected.value['tags_project_area']?.includes(item.id)
+  //       ) ||
+  //       selected.value['tags_project_area']?.length === 0 ||
+  //       !selected.value['tags_project_area']
+  //     const isFiltered =
+  //       (clientIsSelected && sortIsSelected && areaIsSelected) ||
+  //       Object.values(selected.value || []).every((item) => item.length === 0)
+  //     return isFiltered
+  //   }
 
   const getIsFiltered = (record) => {
     if (!record?.tagAuftraggeber) return false
-    const clientIsSelected =
-      record.tagAuftraggeber.some((item) => selected.value['tag_client']?.includes(item.id)) ||
-      selected.value['tag_client']?.length === 0 ||
-      !selected.value['tag_client']
-    const sortIsSelected =
-      record.tagProjektart.some((item) => selected.value['tag_project_sort']?.includes(item.id)) ||
-      selected.value['tag_project_sort']?.length === 0 ||
-      !selected.value['tag_project_sort']
-    const areaIsSelected =
-      record.tagProjektfeld.some((item) =>
-        selected.value['tags_project_area']?.includes(item.id)
-      ) ||
-      selected.value['tags_project_area']?.length === 0 ||
-      !selected.value['tags_project_area']
-    const isFiltered =
-      (clientIsSelected && sortIsSelected && areaIsSelected) ||
-      Object.values(selected.value || []).every((item) => item.length === 0)
-    return isFiltered
+    const tags = [
+      ...record.tagAuftraggeber.map((item) => item.id),
+      ...record.tagProjektart.map((item) => item.id),
+      ...record.tagProjektfeld.map((item) => item.id)
+    ]
+    return selectedAll.value.every((item) => tags.includes(item))
   }
-
-  return { selected, toggleSelected, getIsSelected, getIsFiltered }
+  return { selected, selectedAll, toggleSelected, getIsSelected, getIsFiltered, getChoosables }
 })
 
 export const useApiStore = defineStore('apiCalls', () => {
@@ -114,7 +150,9 @@ export const useApiStore = defineStore('apiCalls', () => {
           text (markdown: true)
           image {
             id
-            responsiveImage {
+            responsiveImage(
+              imgixParams: { fit: crop, w: 300, h: 300, auto: format }
+            ) {
               alt
               base64
               bgColor
@@ -169,7 +207,9 @@ export const useApiStore = defineStore('apiCalls', () => {
         text (markdown: true)
         image {
           id
-          responsiveImage {
+          responsiveImage(
+            imgixParams: { fit: crop, w: 300, h: 300, auto: format }) 
+          {
             alt
             base64
             bgColor

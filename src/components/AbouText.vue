@@ -14,9 +14,8 @@ const { responses } = useApiStore()
 watch(
   responses,
   (newVal, oldVal) => {
-    console.log('about', newVal.about[0].about.aboutText)
+    // console.log('about', newVal.about[0].about.aboutText)
     // if (newVal !== oldVal) {
-
     // }
   },
   { deep: true }

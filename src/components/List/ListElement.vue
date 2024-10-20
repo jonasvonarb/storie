@@ -9,27 +9,30 @@
       </div>
     </RouterLink>
     <div class="info" v-if="route.params.id === item.id">
-      <div class="tags">
-        <template
-          v-for="(tags, i) in ['tagAuftraggeber', 'tagProjektart', 'tagProjektfeld']"
-          :key="tags"
-        >
-          <div class="tag-group">
-            <Tag
-              v-for="(tag, index) in item?.[tags]"
-              :key="tag?.id + '_listTag'"
-              :tag="tag"
-              :index="index"
-              :length="item?.[tags].length"
-              :last="item?.[tags].length !== index + 1"
-            />
-          </div>
-          <div v-if="i !== 2">
-            {{ '-' }}
-          </div>
-        </template>
+      <Image class="img" v-if="item?.image" :data="item?.image?.responsiveImage" />
+      <div class="text">
+        <div class="tags">
+          <template
+            v-for="(tags, i) in ['tagAuftraggeber', 'tagProjektart', 'tagProjektfeld']"
+            :key="tags"
+          >
+            <div class="tag-group">
+              <Tag
+                v-for="(tag, index) in item?.[tags]"
+                :key="tag?.id + '_listTag'"
+                :tag="tag"
+                :index="index"
+                :length="item?.[tags].length"
+                :last="item?.[tags].length !== index + 1"
+              />
+            </div>
+            <div v-if="i !== 2">
+              {{ '-' }}
+            </div>
+          </template>
+        </div>
+        <div class="text" v-html="item.text" />
       </div>
-      <div class="text" v-html="item.text" />
     </div>
   </li>
 </template>
@@ -39,6 +42,7 @@ import { useGeneral } from '@/stores'
 import { useRoute, RouterLink } from 'vue-router'
 
 import Tag from '@/components/List/Tag.vue'
+import { Image } from 'vue-datocms'
 
 const route = useRoute()
 const { getIsFiltered } = useGeneral()
@@ -58,6 +62,7 @@ li
   border-bottom 1px solid black
   &.filtered
     opacity 0.05
+    display none
     pointer-events none
   a
     display flex
@@ -73,17 +78,24 @@ li
     display flex
     flex-direction column
     padding-top 2rem
-    .tags
-      display flex
-      gap 1em
-      font-family: monospace;
-      font-size .75em
-      .tag-group
-        display flex
+    flex-direction row
+    gap 1rem
+    padding-bottom 2rem
+    .img
+      width 300px !important
+      flex-shrink 0
     .text
-      max-width 700px
-      // background-color red
-      // padding-top 2rem
+      .tags
+        display flex
+        gap 1em
+        // font-family: monospace;
+        font-size .75em
+        .tag-group
+          display flex
+      .text
+        max-width 700px
+        // background-color red
+        // padding-top 2rem
 
 @media (max-width: 767px)
   li

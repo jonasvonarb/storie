@@ -23,6 +23,7 @@ const { responses } = useApiStore()
 
 import { useRoute } from 'vue-router'
 import { useSeoMeta } from '@unhead/vue'
+import { shuffle } from '@/helpers'
 const route = useRoute()
 
 // Define the props
@@ -51,9 +52,10 @@ const _responses = ref(null)
 watch(
   [_responses, _type],
   (newVal) => {
-    _items.value = newVal[0]?.[`${newVal[1]}`]
+    const _projects = newVal[0]?.[`${newVal[1]}`]
       ? newVal[0]?.[`${newVal[1]}`]?.[0]?.[props.pKey]
       : Array.from({ length: props.items })
+    _items.value = shuffle([..._projects])
     updateGridSize() // Initial call to set grid size on load
   },
   { deep: true }
@@ -69,7 +71,7 @@ const updateGridSize = () => {
   if (!_items.value) return
   const width = window.innerWidth - 300
   const height = window.innerHeight
-  const itemsCount = Math.ceil(Math.max(_items.value.length, 15))
+  const itemsCount = Math.ceil(Math.max(_items.value.length, 19))
   // Calculate the square size based on the number of items (+ Math.sqrt(itemsCount) -> ajusting for the ceils in squarsize and rowAmount)
   const squareSize = Math.sqrt((height * width) / itemsCount)
   rowAmount.value = Math.ceil(height / squareSize)

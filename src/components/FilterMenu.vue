@@ -3,11 +3,15 @@
     class="container"
     :class="route.params.id && route.matched?.[0]?.path === '/project' && 'inactive'"
   >
-    <div v-for="type in ['allTagsProjectAreas', 'allTagProjectSorts', 'allTagClients']"class="filter-container">
+    <div
+      v-for="type in ['allTagsProjectAreas', 'allTagProjectSorts', 'allTagClients']"
+      class="filter-container"
+      :key="type.id"
+    >
       <div
         v-for="tag in responses?.project?.[0]?.[type]"
         class="grid-item"
-        :class="getIsSelected(tag) && ' active'"
+        :class="`${getIsSelected(tag) && ' active'} ${!choosbaleRef?.includes(tag['id']) && ' notChoosable'}`"
         :key="tag.id"
         @click="select(tag)"
       >
@@ -15,54 +19,38 @@
       </div>
     </div>
   </div>
-
-  <!--
-
-Gescheiterter Versuch für einen nested Loop von Niklas feat. ChatGPT
-
-<ul>
-  <li v-for="bereich in responses?.project" class="grid-item" :key="bereich.id">
-    {{ bereich.label }}
-    
-    <ul>
-      <li v-for="auftrag in bereich.tags" class="grid-item" :key="auftrag.id">
-        {{ auftrag.label }}
-        
-        <ul>
-          <li v-for="tag in auftrag.tags" class="grid-item" :key="tag.id">
-            {{ tag.label }}
-          </li>
-        </ul>
-        
-      </li>
-    </ul>
-  </li>
-</ul>
---></template>
+</template>
 
 <script setup>
 import { useApiStore, useGeneral } from '@/stores'
-import { watch } from 'vue'
+import { storeToRefs } from 'pinia'
+import { computed, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
 
 const { responses } = useApiStore()
 
-const { selected, toggleSelected, getIsSelected } = useGeneral()
+const choosbaleRef = ref([])
+
+const rouetId = computed(() => route.params.id)
+
+const { toggleSelected, getIsSelected, getChoosables } = useGeneral()
+const generalStore = useGeneral()
+const { selectedAll } = storeToRefs(generalStore)
 
 function select(tag) {
   toggleSelected(tag)
 }
-
 watch(
-  () => responses?.project,
-  () => {
-    if (responses?.project) {
-      // console.log('responses?.project', responses?.project[0]) //watches for changes and "waits" for the data to be loaded
+  [responses, selectedAll, rouetId],
+  (newVal) => {
+    console.log('FilterMenu:', newVal)
+    if (responses?.project?.[0].allProjects) {
+      choosbaleRef.value = getChoosables(responses?.project[0].allProjects)
     }
   },
-  { deep: true }
+  { deep: true, immediate: true } // Use deep: true if selected is an array or object
 )
 
 // console.log('Test:', responses?.project[0])
@@ -72,18 +60,48 @@ watch(
 .container
   display flex
   flex-direction column
-  width calc(100vw - var(--containert-width) - var(--padding))
-  font-size 18px
+  width calc(100vw - var(--containert-width) - 2rem)
+  max-height calc(100vh - var(--header-height) - 8.5rem)
+  // flex-wrap: wrap;
+  overflow scroll
   color black
   gap 2rem
+  font-size var(--filter-font-size)
   &.inactive
     opacity 0.5
     pointer-events none
-  .grid-item
-    cursor pointer
+  .filter-container
+    // gap .2rem
     display flex
-    &:hover
-      background-color #f1f1f1
+    flex-direction column
+    .grid-item
+      padding-block .1rem
+      cursor pointer
+      display flex
+      align-items center
+      &::before
+          content ''
+          display block
+          width 0rem
+          height 0rem
+          border-radius 50%
+          background-color black
+          transition 0.2s all
+      &.active
+        font-weight bold
+        &::before
+          width .5rem
+          height .5rem
+          margin-right .3rem
+      &:hover
+        text-decoration underline
+        text-underline-offset: .15rem;
+        text-decoration-thickness: .1rem;
+      &.notChoosable
+        opacity 0.2
+        pointer-events none
+
+
 
 @media (max-width: 767px)
   .container

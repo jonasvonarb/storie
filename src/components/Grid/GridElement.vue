@@ -85,6 +85,7 @@ const props = defineProps({
   flex-grow: 0;
   padding .15rem
   cursor pointer
+  transition 0.1s opacity
   > a
     cursor inherit
     width 100%
@@ -96,14 +97,18 @@ const props = defineProps({
     // pointer-events none
   &.filtered
     cursor default
-    opacity 0.1
+    opacity 0.05
   &.inActive
     cursor default
-    opacity 0.02
+    opacity 0.01
   &.active
     .info
-      padding-left .5rem
-      padding-right 1rem
+      z-index 10
+      background-color rgba(255, 255, 255, .5)
+      padding-top .3em
+      padding-bottom .6em
+      padding-left 2em
+      padding-right 1.9em
       z-index 1
       position absolute
       width calc(var(--square-size-row) * 3);
@@ -115,9 +120,10 @@ const props = defineProps({
       &.top
         top unset
         bottom 0%
-      // &.top
       .text
         hyphens auto
+      h3
+        margin-top -.2rem
   &.about
     .info
       width calc(var(--square-size-row) * 2);
@@ -126,12 +132,17 @@ const props = defineProps({
         left -200%
   .close
     position absolute
-    top .3rem
-    right .5rem
+    top .8em
+    left 0.5rem
     color black
     svg
-      height 1.5em
-      width 1.5em
+      height 1.1em
+      width 1.1em
+  .info
+    &.left
+      .close
+        left unset
+        right .5rem
 
 @media (max-width: 767px)
   .grid-item
