@@ -24,6 +24,6 @@ watch(
 
 <style lang="stylus" scoped>
 .container
-  max-width 300px
+  // max-width 300px
   hyphens auto
 </style>

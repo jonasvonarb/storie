@@ -45,7 +45,6 @@ function select(tag) {
 watch(
   [responses, selectedAll, rouetId],
   (newVal) => {
-    console.log('FilterMenu:', newVal)
     if (responses?.project?.[0].allProjects) {
       choosbaleRef.value = getChoosables(responses?.project[0].allProjects)
     }
@@ -61,8 +60,7 @@ watch(
   display flex
   flex-direction column
   width calc(100vw - var(--containert-width) - 2rem)
-  max-height calc(100vh - var(--header-height) - 8.5rem)
-  // flex-wrap: wrap;
+  height calc(100vh - var(--header-height) - var(--header-height))
   overflow scroll
   color black
   gap 2rem
@@ -93,10 +91,11 @@ watch(
           width .5rem
           height .5rem
           margin-right .3rem
-      &:hover
-        text-decoration underline
-        text-underline-offset: .15rem;
-        text-decoration-thickness: .1rem;
+      @media (hover: hover)
+        &:hover
+          text-decoration underline
+          text-underline-offset: .15rem;
+          text-decoration-thickness: .1rem;
       &.notChoosable
         opacity 0.2
         pointer-events none

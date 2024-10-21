@@ -23,6 +23,11 @@ export const useGeneral = defineStore('generalStore', () => {
     }
   }
 
+  const clearSelected = () => {
+    selected.value = []
+    selectedAll.value = []
+  }
+
   const getIsSelected = (record) => {
     const type = record._modelApiKey
     const id = record.id
@@ -42,33 +47,8 @@ export const useGeneral = defineStore('generalStore', () => {
       // const isChoosable = tags.includes(tag.id)
       return (arr = [...arr, ..._tags])
     }, [])
-
-    // var uniques = (tags || []).unique()
-    console.log('tags', unique(tags))
     return unique(tags)
   }
-
-  //   const getIsFiltered = (record) => {
-  //     if (!record?.tagAuftraggeber) return false
-  //     const clientIsSelected =
-  //       record.tagAuftraggeber.some((item) => selected.value['tag_client']?.includes(item.id)) ||
-  //       selected.value['tag_client']?.length === 0 ||
-  //       !selected.value['tag_client']
-  //     const sortIsSelected =
-  //       record.tagProjektart.some((item) => selected.value['tag_project_sort']?.includes(item.id)) ||
-  //       selected.value['tag_project_sort']?.length === 0 ||
-  //       !selected.value['tag_project_sort']
-  //     const areaIsSelected =
-  //       record.tagProjektfeld.some((item) =>
-  //         selected.value['tags_project_area']?.includes(item.id)
-  //       ) ||
-  //       selected.value['tags_project_area']?.length === 0 ||
-  //       !selected.value['tags_project_area']
-  //     const isFiltered =
-  //       (clientIsSelected && sortIsSelected && areaIsSelected) ||
-  //       Object.values(selected.value || []).every((item) => item.length === 0)
-  //     return isFiltered
-  //   }
 
   const getIsFiltered = (record) => {
     if (!record?.tagAuftraggeber) return false
@@ -79,7 +59,15 @@ export const useGeneral = defineStore('generalStore', () => {
     ]
     return selectedAll.value.every((item) => tags.includes(item))
   }
-  return { selected, selectedAll, toggleSelected, getIsSelected, getIsFiltered, getChoosables }
+  return {
+    selected,
+    selectedAll,
+    toggleSelected,
+    getIsSelected,
+    getIsFiltered,
+    getChoosables,
+    clearSelected
+  }
 })
 
 export const useApiStore = defineStore('apiCalls', () => {

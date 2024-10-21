@@ -39,8 +39,11 @@ nav
     text-decoration none
     color black
     font-size var(--nav-font-size)
-    &:hover
-      text-decoration underline
+    svg
+      height .8em
+    @media (hover: hover)
+      &:hover
+        text-decoration underline
 
 @media (max-width: 767px)
   nav

@@ -2,7 +2,10 @@
   <div
     :class="`${
       route.params.id === item.id ? 'active ' : route.params.id ? 'inActive ' : ' '
-    }${type} ${getIsFiltered(item) || type !== 'project' ? '' : 'filtered'} grid-item`"
+    }${type} ${getIsFiltered(item) || type !== 'project' ? '' : 'filtered'} grid-item ${
+      (colAmount - (index % colAmount) > (type === 'project' ? 3 : 2) ? ' ' : ' left') +
+      (Math.ceil(index / colAmount) < rowAmount - 2 ? ' ' : ' top')
+    } ${index % 2 === 0 ? ' even' : ' odd'}`"
   >
     <RouterLink
       :to="
@@ -13,7 +16,7 @@
           : `/${type}`
       "
     >
-      <Image v-if="item?.image" :data="item?.image?.responsiveImage" />
+      <Image class="img" v-if="item?.image" :data="item?.image?.responsiveImage" />
     </RouterLink>
     <div
       v-if="route.params.id === item.id && item?.title"
@@ -90,7 +93,8 @@ const props = defineProps({
     cursor inherit
     width 100%
     height 100%
-    overflow hidden
+    > div
+      max-width unset !important
   &.blank
     visibility hidden
   &.filtered
@@ -107,8 +111,8 @@ const props = defineProps({
       background-color rgba(255, 255, 255, .5)
       padding-top .3em
       padding-bottom .6em
-      padding-left 2em
-      padding-right 1.9em
+      padding-left 1em
+      padding-right 1em
       z-index 1
       position absolute
       width calc(var(--square-size-row) * 3);
@@ -121,6 +125,10 @@ const props = defineProps({
         top unset
         bottom 0%
       .text
+        padding-top .8em
+        display flex
+        gap .8em
+        flex-direction column
         hyphens auto
       h3
         margin-top -.2rem
@@ -132,8 +140,8 @@ const props = defineProps({
         left -200%
   .close
     position absolute
-    top .8em
-    left 0.5rem
+    top 0.1em
+    right 0.5rem
     color black
     svg
       height 1.1em
@@ -150,6 +158,7 @@ const props = defineProps({
     height calc(100vw / 2)
     background-color white
     position relative
+    padding .2rem
     .info
     .info.left
     .info.top
@@ -158,7 +167,11 @@ const props = defineProps({
       height auto
       min-height unset
       background-color white
-      top 100% !important
-      bottom 0
+      top calc(100% + .5rem) !important
+      bottom unset
       left 0 !important
+      border-block solid 1px black
+    &.odd
+      .info
+        left calc(-1 * (100% + 4px))  !important
 </style>

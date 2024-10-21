@@ -69,8 +69,8 @@ const gridContainer = ref(null)
 // Function to calculate and update the grid layout dynamically
 const updateGridSize = () => {
   if (!_items.value) return
-  const width = window.innerWidth - 300
-  const height = window.innerHeight
+  const width = window.innerWidth - 300 - 8 * 2
+  const height = window.innerHeight - 4 * 2
   const itemsCount = Math.ceil(Math.max(_items.value.length, 19))
   // Calculate the square size based on the number of items (+ Math.sqrt(itemsCount) -> ajusting for the ceils in squarsize and rowAmount)
   const squareSize = Math.sqrt((height * width) / itemsCount)
@@ -103,6 +103,7 @@ const info = ref({
 })
 
 const headTitle = computed(() => `${info.value?.title}`)
+const headDescription = computed(() => `${info.value?.description}`)
 
 // Watcher for route changes
 watch(
@@ -110,36 +111,30 @@ watch(
   (newData, oldData) => {
     if (!_items.value) return
     const item = _items.value?.find((item) => route.params?.id === item?.id)
-    const title = item ? `Storie - ${item.title}` : undefined
+    const title = item ? `${item.title} – Storie` : undefined
     info.value = {
       title: title || 'Storie',
-      description: 'test'
+      description:
+        'Storie beratet, organisiert und setzt um. Wir erarbeiten Lösungen. Kreativ und pragmatisch, auf Augenhöhe mit unseren Projektpartnerinnen.'
     }
   },
   { immediate: true, deep: true }
 )
 
 useHead({
-  // htmlAttrs,
   title: headTitle
 })
 useSeoMeta({
   charset: 'utf-8',
   title: headTitle,
-  ogImage: 'https://storie.ch/preview.png',
-  twitterImage: 'https://storie.ch/preview.png'
-  // robots: headIndex,
-  // ogDescription: headDescription,
-  // description: headDescription,
-  // ogLocale: locale,
-  // ogType: "website",
-  // ogTitle: headTitle,
-  // ogUrl: ogUrl,
-  // twitterCard: "summary_large_image",
-  // twitterDomain: import.meta.env.VITE_APP_storie_Ch,
-  // twitterUrl: ogUrl,
-  // twitterTitle: headTitle,
-  // twitterDescription: headDescription,
+  ogImage: 'https://staging.storie.ch/preview.png',
+  twitterImage: 'https://staging.storie.ch/preview.png',
+  ogDescription: headDescription,
+  description: headDescription,
+  ogLocale: 'de_CH',
+  ogType: 'website',
+  ogTitle: headTitle,
+  ogUrl: 'https://staging.storie.ch'
 })
 </script>
 
@@ -147,12 +142,13 @@ useSeoMeta({
 
 .grid
   --img-aspect-ratio: 1
+  padding-block 4px
+  transform translate(-4px, 0px)
   position relative
   display: flex;
   justify-content flex-start
   align-content flex-start
   flex-wrap wrap;
-  width 75vw
   height 100vh
   margin 0
   width: calc(var(--containert-width) * var(--img-aspect-ratio));
@@ -165,6 +161,8 @@ useSeoMeta({
 
 @media (max-width: 767px)
   .grid
+    transform translate(0px, 0px)
+    padding-top 0
     width 100vw
     height auto
     min-height 100dvh
@@ -174,5 +172,5 @@ useSeoMeta({
 
 @media (min-aspect-ratio: 16/7)
   .grid
-    --img-aspect-ratio: 1.1
+    // --img-aspect-ratio: 1.1
 </style>

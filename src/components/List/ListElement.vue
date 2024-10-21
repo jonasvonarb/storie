@@ -76,7 +76,6 @@ li
       font-weight bold
   .info
     display flex
-    flex-direction column
     padding-top 2rem
     flex-direction row
     gap 1rem
@@ -105,4 +104,21 @@ li
       gap 0
       .title
         font-weight bold
+      &.router-link-active
+        font-weight normal
+    .text
+      gap 1rem
+      display flex
+      flex-direction column
+      .tags
+        flex-direction column
+        gap 0rem !important
+        > div:nth-child(2)
+        > div:nth-child(4)
+          display none
+    .info
+      flex-direction column !important
+      .img
+        width 100% !important
+        flex-shrink 0
 </style>

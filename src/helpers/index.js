@@ -39,6 +39,5 @@ export const unique = (array) => {
     count = 0
   }
 
-  console.log(outputArray)
   return outputArray
 }
