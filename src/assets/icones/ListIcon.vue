@@ -1,15 +1,130 @@
 <template>
-  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
-    <path
-      fill="currentColor"
-      fillRule="evenodd"
-      d="M0 .5A.5.5 0 0 1 .5 0h2a.5.5 0 0 1 0 1h-2A.5.5 0 0 1 0 .5Zm4 0a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1h-10A.5.5 0 0 1 4 .5Zm-4 2A.5.5 0 0 1 .5 2h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5Zm-4 2A.5.5 0 0 1 .5 4h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5Zm-4 2A.5.5 0 0 1 .5 6h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm-4 2A.5.5 0 0 1 .5 8h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm-4 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1h-10a.5.5 0 0 1-.5-.5Zm-4 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm-4 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5Z"
-    ></path>
+  <svg
+    viewBox="0 0 270 246"
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xml:space="preserve"
+    xmlns:serif="http://www.serif.com/"
+    style="fill-rule: evenodd; clip-rule: evenodd; stroke-linejoin: round; stroke-miterlimit: 2"
+  >
+    <g id="Artboard2" transform="matrix(1,0,0,1,-572.622,-48.3946)">
+      <rect x="572.622" y="48.395" width="269.575" height="245.729" style="fill: none" />
+      <clipPath id="_clip1">
+        <rect x="572.622" y="48.395" width="269.575" height="245.729" />
+      </clipPath>
+      <g clip-path="url(#_clip1)">
+        <g id="Ebene-1" serif:id="Ebene 1" transform="matrix(4.16667,0,0,4.16667,523.053,0.394583)">
+          <g transform="matrix(-1,0,0,1,88.79,-56.0923)">
+            <rect
+              x="12.046"
+              y="67.707"
+              width="64.698"
+              height="2.883"
+              style="fill: rgb(29, 29, 27)"
+            />
+          </g>
+          <g transform="matrix(-1,0,0,1,111.511,-43.6263)">
+            <rect
+              x="34.767"
+              y="61.474"
+              width="41.977"
+              height="2.883"
+              style="fill: rgb(29, 29, 27)"
+            />
+          </g>
+          <g transform="matrix(-1,0,0,1,111.511,-31.1623)">
+            <rect
+              x="34.767"
+              y="55.242"
+              width="41.977"
+              height="2.883"
+              style="fill: rgb(29, 29, 27)"
+            />
+          </g>
+          <g transform="matrix(-1,0,0,1,111.511,-18.6983)">
+            <rect
+              x="34.767"
+              y="49.01"
+              width="41.977"
+              height="2.883"
+              style="fill: rgb(29, 29, 27)"
+            />
+          </g>
+          <g transform="matrix(-1,0,0,1,111.511,-6.2323)">
+            <rect
+              x="34.767"
+              y="42.777"
+              width="41.977"
+              height="2.883"
+              style="fill: rgb(29, 29, 27)"
+            />
+          </g>
+          <g transform="matrix(1,0,0,1,0,-31.1043)">
+            <path
+              d="M28.487,48.434L12.046,48.434L12.046,64.875L28.487,64.875L28.487,48.434ZM25.381,61.769L15.153,61.769L15.153,51.541L25.381,51.541L25.381,61.769Z"
+              style="fill: rgb(29, 29, 27); fill-rule: nonzero"
+            />
+          </g>
+          <g transform="matrix(-1,0,0,1,88.79,6.2317)">
+            <rect
+              x="12.046"
+              y="36.545"
+              width="64.698"
+              height="2.883"
+              style="fill: rgb(29, 29, 27)"
+            />
+          </g>
+          <g transform="matrix(-1,0,0,1,111.511,18.6977)">
+            <rect
+              x="34.767"
+              y="30.312"
+              width="41.977"
+              height="2.883"
+              style="fill: rgb(29, 29, 27)"
+            />
+          </g>
+          <g transform="matrix(-1,0,0,1,111.511,31.1617)">
+            <rect
+              x="34.767"
+              y="24.08"
+              width="41.977"
+              height="2.883"
+              style="fill: rgb(29, 29, 27)"
+            />
+          </g>
+          <g transform="matrix(-1,0,0,1,111.511,56.0917)">
+            <rect
+              x="34.767"
+              y="11.615"
+              width="41.977"
+              height="2.883"
+              style="fill: rgb(29, 29, 27)"
+            />
+          </g>
+          <g transform="matrix(-1,0,0,1,111.511,43.6257)">
+            <rect
+              x="34.767"
+              y="17.848"
+              width="41.977"
+              height="2.883"
+              style="fill: rgb(29, 29, 27)"
+            />
+          </g>
+          <g transform="matrix(1,0,0,1,0,31.6977)">
+            <path
+              d="M28.487,17.033L12.046,17.033L12.046,33.474L28.487,33.474L28.487,17.033ZM25.381,30.367L15.153,30.367L15.153,20.139L25.381,20.139L25.381,30.367Z"
+              style="fill: rgb(29, 29, 27); fill-rule: nonzero"
+            />
+          </g>
+        </g>
+      </g>
+    </g>
   </svg>
 </template>
 
 <script>
 export default {
-  name: 'ListIcon',
+  name: 'ListIcon'
 }
 </script>

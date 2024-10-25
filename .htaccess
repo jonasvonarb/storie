@@ -1,0 +1,11 @@
+
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^miozari\.ch$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.miozari\.ch$
+RewriteRule ^(.*)$ "http\:\/\/www\.miozzari\.com\/$1" [R=301,L]
+RewriteCond %{HTTP_HOST} ^68\-88\-18\.ch$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.68\-88\-18\.ch$
+RewriteRule ^(.*)$ "https\:\/\/688818\.ch\/$1" [R=301,L]
+RewriteCond %{HTTP_HOST} ^813\.ch$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.813\.ch$
+RewriteRule ^(.*)$ "https\:\/\/www\.thilomangold\.ch\/$1" [R=301,L]

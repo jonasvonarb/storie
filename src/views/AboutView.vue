@@ -12,7 +12,7 @@ import StorieGrid from '@/components/Grid/StorieGrid.vue'
 const { call } = useApiStore()
 
 useHead({
-  title: 'Über Uns – Storie'
+  title: 'über uns – Storie'
 })
 
 onMounted(() => {

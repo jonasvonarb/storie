@@ -7,12 +7,6 @@ import { useApiStore } from '@/stores'
 import AbouText from './components/AbouText.vue'
 import FilterMenu from './components/FilterMenu.vue'
 
-// import { useHead } from '@unhead/vue'
-
-// useHead({
-//   title: 'Storie'
-// })
-
 const apiStore = useApiStore()
 apiStore.call('project')
 const route = useRoute()
@@ -20,7 +14,7 @@ const route = useRoute()
 
 <template>
   <Header />
-  <main class="mainContainer">
+  <main class="containerMain">
     <div class="leftWrapper">
       <FilterMenu
         v-if="
@@ -37,22 +31,28 @@ const route = useRoute()
 </template>
 
 <style lang="stylus" scoped>
-.mainContainer
+.containerMain
   display flex
   position relative
   .leftWrapper
     position sticky
-    //background-color red
     top 0rem
     padding 1rem
     padding-top calc(1rem + var(--header-height))
-    height 100vh
+    // height 100vh
     width calc(100vw - var(--containert-width))
 
+
+
 @media (max-width: 767px)
-  .mainContainer
-    flex-direction column
+  .containerMain
+    margin-top var(--header-height)
+    position initial
+    flex-direction column-reverse
+    margin-bottom 50vh
     .leftWrapper
+      position initial
       width 100vw
-      height auto
+      padding-top 2rem
+      padding-bottom 2rem
 </style>

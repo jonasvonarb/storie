@@ -22,8 +22,11 @@ header
   z-index 10
   height var(--header-height)
   width calc(100vw - var(--containert-width) - 2rem)
-  top 1rem
-  left 1rem
+  top 0
+  left 0
+  padding 1rem
+  padding-bottom 0
+  background-color white
   a
     color black
     text-decoration none
@@ -34,7 +37,6 @@ header
 
 @media (max-width: 767px)
   header
-    height 6.5rem
     top 0
     left 0px
     padding 1rem

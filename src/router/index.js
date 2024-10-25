@@ -13,14 +13,14 @@ const router = createRouter({
       path: '/list',
       name: 'list',
       component: HomeView,
-      children: [{ path: '/list/:id', component: HomeView }]
+      children: [{ path: '/list/:slug', component: HomeView, name: 'list-page' }]
     },
     {
       path: '/project',
       name: 'project',
       component: HomeView,
       redirect: '/',
-      children: [{ path: '/project/:id', component: HomeView }]
+      children: [{ path: '/project/:slug', component: HomeView, name: 'project-page' }]
     },
     {
       path: '/about',
@@ -29,15 +29,15 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue'),
-      children: [{ path: '/about/:id', component: () => import('../views/AboutView.vue') }]
+      children: [{ path: '/about/:slug', component: () => import('../views/AboutView.vue') }]
     },
     {
-      path: '/impressum',
-      name: 'impressum',
+      path: '/privacy',
+      name: 'privacy',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/ImpressumView.vue')
+      component: () => import('../views/PrivacyView.vue')
     }
   ]
 })

@@ -1,6 +1,6 @@
 <template>
   <li :class="!getIsFiltered(item) && 'filtered'">
-    <RouterLink :to="route.params.id !== item.id ? `/list/${item.id}` : '/list'">
+    <RouterLink :to="route.params.slug !== item.slug ? `/list/${item.slug}` : '/list'">
       <div class="title">
         {{ item.title }}
       </div>
@@ -8,7 +8,7 @@
         {{ item.subTitle }}
       </div>
     </RouterLink>
-    <div class="info" v-if="route.params.id === item.id">
+    <div class="info" v-if="route.params.slug === item.slug">
       <Image class="img" v-if="item?.image" :data="item?.image?.responsiveImage" />
       <div class="text">
         <div class="tags">
@@ -16,19 +16,19 @@
             v-for="(tags, i) in ['tagAuftraggeber', 'tagProjektart', 'tagProjektfeld']"
             :key="tags"
           >
-            <div class="tag-group">
-              <Tag
-                v-for="(tag, index) in item?.[tags]"
-                :key="tag?.id + '_listTag'"
-                :tag="tag"
-                :index="index"
-                :length="item?.[tags].length"
-                :last="item?.[tags].length !== index + 1"
-              />
-            </div>
-            <div v-if="i !== 2">
-              {{ '-' }}
-            </div>
+            <!-- <template class="tag-group"> -->
+            <Tag
+              v-for="(tag, index) in item?.[tags]"
+              :key="tag?.id + '_listTag'"
+              :tag="tag"
+              :index="index"
+              :length="item?.[tags].length"
+              :last="item?.[tags].length !== index + 1"
+            />
+            <!-- </template> -->
+            <template v-if="i !== 2">
+              {{ ' - ' }}
+            </template>
           </template>
         </div>
         <div class="text" v-html="item.text" />
@@ -81,15 +81,21 @@ li
     gap 1rem
     padding-bottom 2rem
     .img
+      height unset
       width 300px !important
       flex-shrink 0
+      :global(picture > img)
+        object-fit cover
+        height unset !important
     .text
+      padding-right 2rem
       .tags
         display flex
         gap 1em
         // font-family: monospace;
         font-size .75em
         .tag-group
+          flex-shrink 1
           display flex
       .text
         max-width 700px

@@ -1,17 +1,24 @@
 <template>
   <footer>
     <nav>
-      <template v-if="!route.path.includes('/about')">
-        <RouterLink
-          v-if="!route.path.includes('/list')"
-          :to="`/list${route.params.id ? '/' + route.params.id : ''}`"
-        >
-          <ListIcon />
-        </RouterLink>
-        <RouterLink :to="`${route.params.id ? '/project/' + route.params.id : '/'}`" v-else>
-          <GridIcon />
-        </RouterLink>
-        <RouterLink to="/about">Über Uns</RouterLink>
+      <template
+        v-if="route.path.includes('/list') || route.path.includes('/project') || route.path === '/'"
+      >
+        <div>
+          <RouterLink
+            :to="`${route.params.slug ? '/project/' + route.params.slug : '/'}`"
+            :class="route.path.includes('/list') ? 'active iocn' : 'icon'"
+          >
+            <GridIcon />
+          </RouterLink>
+          <RouterLink
+            :class="route.path.includes('/project') || route.path === '/' ? 'icon active' : 'icon'"
+            :to="`/list${route.params.slug ? '/' + route.params.slug : ''}`"
+          >
+            <ListIcon />
+          </RouterLink>
+        </div>
+        <RouterLink to="/about">über uns</RouterLink>
       </template>
       <RouterLink v-else to="/">Projekte</RouterLink>
     </nav>
@@ -28,31 +35,55 @@ const route = useRoute()
 <style lang="stylus" scoped>
 nav
   position fixed
-  bottom 1rem
-  left 1rem
+  bottom 0
+  left 0
   display flex
   flex-direction column
   text-align bottom
   justify-content flex-end
+  background-color white
+  padding 1rem
+  width calc(100vw - var(--containert-width) - 2rem)
   a
     margin-right 1rem
     text-decoration none
     color black
     font-size var(--nav-font-size)
     svg
-      height .8em
+      height 1em
+      width 1em
+      margin-left .05em
     @media (hover: hover)
       &:hover
         text-decoration underline
-
+.icon
+  opacity .2
+  transition opacity .3s
+  &.active
+    opacity 1
 @media (max-width: 767px)
   nav
     flex-direction: column-reverse
     top .5rem
-    right .5rem
+    width auto
+    text-align right
     left unset
     bottom unset
     z-index 10
+    right .5rem
+    padding-inline .5rem
+    padding-top 0
+    padding-bottom 0
+    gap .2em
     a
+      margin-right 0
       text-align end
+    div
+      display flex
+      justify-content flex-start
+      flex-direction row-reverse
+      gap .5rem
+      svg
+        height 1em
+        width 1em
 </style>

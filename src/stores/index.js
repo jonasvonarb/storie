@@ -134,6 +134,7 @@ export const useApiStore = defineStore('apiCalls', () => {
           _modelApiKey
           id
           title
+          slug
           subTitle
           text (markdown: true)
           image {
@@ -188,10 +189,13 @@ export const useApiStore = defineStore('apiCalls', () => {
       }`,
     about: `
     {
-      allPeople{
+      allPeople(orderBy: lastname_ASC) {
         _modelApiKey
         id
-        title
+        name
+        lastname
+        eMail
+        slug
         text (markdown: true)
         image {
           id
@@ -216,6 +220,16 @@ export const useApiStore = defineStore('apiCalls', () => {
         aboutText (markdown: true)
         id
         _modelApiKey
+      }
+    }`,
+    privacy: `
+    {
+      privacy {
+        text {
+          blocks
+          links
+          value
+        }
       }
     }`
   }

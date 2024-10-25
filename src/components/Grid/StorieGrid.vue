@@ -17,12 +17,11 @@
 import { ref, onMounted, onBeforeUnmount, watch, computed } from 'vue'
 import GridElement from './GridElement.vue'
 import { useApiStore } from '@/stores'
-import { useHead } from 'unhead'
 
 const { responses } = useApiStore()
 
 import { useRoute } from 'vue-router'
-import { useSeoMeta } from '@unhead/vue'
+import { useSeoMeta, useHead } from '@unhead/vue'
 import { shuffle } from '@/helpers'
 const route = useRoute()
 
@@ -55,7 +54,7 @@ watch(
     const _projects = newVal[0]?.[`${newVal[1]}`]
       ? newVal[0]?.[`${newVal[1]}`]?.[0]?.[props.pKey]
       : Array.from({ length: props.items })
-    _items.value = shuffle([..._projects])
+    _items.value = props.type === 'project' ? shuffle([..._projects]) : [..._projects]
     updateGridSize() // Initial call to set grid size on load
   },
   { deep: true }
@@ -69,14 +68,17 @@ const gridContainer = ref(null)
 // Function to calculate and update the grid layout dynamically
 const updateGridSize = () => {
   if (!_items.value) return
-  const width = window.innerWidth - 300 - 8 * 2
+  const panel_left = 400
+  const width = window.innerWidth - panel_left - 8 * 2
   const height = window.innerHeight - 4 * 2
   const itemsCount = Math.ceil(Math.max(_items.value.length, 19))
   // Calculate the square size based on the number of items (+ Math.sqrt(itemsCount) -> ajusting for the ceils in squarsize and rowAmount)
   const squareSize = Math.sqrt((height * width) / itemsCount)
   rowAmount.value = Math.ceil(height / squareSize)
   colAmount.value = Math.ceil(itemsCount / rowAmount.value)
-  const squareSizeActual = height / rowAmount.value
+  let squareSizeActual = height / rowAmount.value
+  const isToBig = squareSizeActual * colAmount.value - width > 0 && props.type === 'about'
+  if (isToBig) squareSizeActual = width / colAmount.value - 10
   document.documentElement.style.setProperty('--square-size-row', `${squareSizeActual}px`)
   document.documentElement.style.setProperty(
     '--containert-width',
@@ -107,11 +109,11 @@ const headDescription = computed(() => `${info.value?.description}`)
 
 // Watcher for route changes
 watch(
-  () => [route.params?.id, _items.value],
-  (newData, oldData) => {
+  () => [route.params?.slug, _items.value],
+  () => {
     if (!_items.value) return
-    const item = _items.value?.find((item) => route.params?.id === item?.id)
-    const title = item ? `${item.title} – Storie` : undefined
+    const item = _items.value?.find((item) => route.params?.slug === item?.slug)
+    const title = item ? `${item.title ? item.title : item.name} – Storie` : undefined
     info.value = {
       title: title || 'Storie',
       description:
@@ -142,9 +144,10 @@ useSeoMeta({
 
 .grid
   --img-aspect-ratio: 1
+  position fixed
+  right 0
   padding-block 4px
   transform translate(-4px, 0px)
-  position relative
   display: flex;
   justify-content flex-start
   align-content flex-start
@@ -161,14 +164,16 @@ useSeoMeta({
 
 @media (max-width: 767px)
   .grid
+    position initial
     transform translate(0px, 0px)
     padding-top 0
     width 100vw
     height auto
     min-height 100dvh
+    gap 0
     background-color white
+    padding-bottom 1rem
     // padding-top: calc(1rem);
-    padding-bottom 50vh
 
 @media (min-aspect-ratio: 16/7)
   .grid

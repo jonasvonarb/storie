@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@unhead/vue": "^1.11.9",
+    "datocms-structured-text-to-html-string": "^4.0.1",
     "pinia": "^2.1.7",
     "unhead": "^1.11.9",
     "vite-plugin-html": "^3.2.2",
