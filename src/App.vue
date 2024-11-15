@@ -38,8 +38,8 @@ const route = useRoute()
     position sticky
     top 0rem
     padding 1rem
+    height 100vh
     padding-top calc(1rem + var(--header-height))
-    // height 100vh
     width calc(100vw - var(--containert-width))
 
 

@@ -12,7 +12,11 @@
             <GridIcon />
           </RouterLink>
           <RouterLink
-            :class="route.path.includes('/project') || route.path === '/' ? 'icon active' : 'icon'"
+            :class="
+              route.path.includes('/project') || route.path === '/'
+                ? 'list icon active'
+                : 'list icon'
+            "
             :to="`/list${route.params.slug ? '/' + route.params.slug : ''}`"
           >
             <ListIcon />
@@ -41,7 +45,7 @@ nav
   flex-direction column
   text-align bottom
   justify-content flex-end
-  background-color white
+  background: linear-gradient(to bottom, rgba(255,255,255,0),rgba(255,255,255,0.8), rgba(255,255,255,1))
   padding 1rem
   width calc(100vw - var(--containert-width) - 2rem)
   a
@@ -59,6 +63,9 @@ nav
 .icon
   opacity .2
   transition opacity .3s
+  &.list
+    svg
+      height 0.95em
   &.active
     opacity 1
 @media (max-width: 767px)

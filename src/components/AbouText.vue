@@ -30,9 +30,9 @@ watch(
   width calc(100vw - var(--containert-width) - 2rem)
   // height calc(100vh - var(--header-height) - var(--header-height))
   overflow hidden
-  max-width 350px
+  max-width 380px
   hyphens auto
-  padding-bottom 4rem
+  padding-bottom calc(4rem + var(--header-height))
 
 
 @media (max-width: 767px)
