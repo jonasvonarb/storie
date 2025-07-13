@@ -14,7 +14,7 @@ import { render } from 'datocms-structured-text-to-html-string'
 const { call, responses } = useApiStore()
 
 useHead({
-  title: 'über uns – Storie'
+  title: 'Datenschutz – Storie'
 })
 
 onMounted(() => {
@@ -25,6 +25,7 @@ onMounted(() => {
 .container
   padding 2rem
   width var(--containert-width)
+  max-width 700px
   h2
     margin-bottom 2rem
 

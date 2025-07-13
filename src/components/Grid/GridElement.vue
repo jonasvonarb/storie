@@ -30,21 +30,21 @@
       }`"
     >
       <template v-if="item?.title">
-        <h3>
+        <h1>
           {{ item?.title }}
-        </h3>
-        <h4>
+        </h1>
+        <h2>
           {{ item?.subTitle }}
-        </h4>
+        </h2>
       </template>
       <template v-else-if="item?.name">
-        <h3>{{ `${item?.name} ${item?.lastname}` }}</h3>
+        <h1>{{ `${item?.name} ${item?.lastname}` }}</h1>
         <template v-if="item?.eMail">
-          <h4>
+          <h2>
             <a :href="`mailto:${item?.eMail}`">
               {{ `${item?.eMail.replace('@', ' at ')}` }}
             </a>
-          </h4>
+          </h2>
         </template>
       </template>
       <div class="text" v-html="item?.text" />

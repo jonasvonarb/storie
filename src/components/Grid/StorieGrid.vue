@@ -106,18 +106,23 @@ const info = ref({
 
 const headTitle = computed(() => `${info.value?.title}`)
 const headDescription = computed(() => `${info.value?.description}`)
+const canonical = computed(() => `${info.value?.canonical}`)
 
 // Watcher for route changes
 watch(
   () => [route.params?.slug, _items.value],
   () => {
     if (!_items.value) return
+    console.log(route.path)
     const item = _items.value?.find((item) => route.params?.slug === item?.slug)
-    const title = item ? `${item.title ? item.title : item.name} – Storie` : undefined
+    const title = item
+      ? `${item.title ? item.title : item.name} – Storie Kulturagentur, Basel`
+      : undefined
     info.value = {
-      title: title || 'Storie',
+      title: title || 'Storie Kulturagentur, Basel',
       description:
-        'Storie beratet, organisiert und setzt um. Wir erarbeiten Lösungen. Kreativ und pragmatisch, auf Augenhöhe mit unseren Projektpartnerinnen.'
+        'Storie beratet, organisiert und setzt um. Wir erarbeiten Lösungen. Kreativ und pragmatisch, auf Augenhöhe mit unseren Projektpartnerinnen.',
+      canonical: 'https://storie.ch' + route?.path?.replace('project', 'list')
     }
   },
   { immediate: true, deep: true }
@@ -129,14 +134,14 @@ useHead({
 useSeoMeta({
   charset: 'utf-8',
   title: headTitle,
-  ogImage: 'https://staging.storie.ch/preview.png',
-  twitterImage: 'https://staging.storie.ch/preview.png',
+  ogImage: 'https://storie.ch/preview.png',
+  twitterImage: 'https://storie.ch/preview.png',
   ogDescription: headDescription,
   description: headDescription,
   ogLocale: 'de_CH',
   ogType: 'website',
   ogTitle: headTitle,
-  ogUrl: 'https://staging.storie.ch'
+  ogUrl: 'https://storie.ch'
 })
 </script>
 

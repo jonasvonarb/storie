@@ -1,12 +1,22 @@
 <template>
   <li :class="!getIsFiltered(item) && 'filtered'">
     <RouterLink :to="route.params.slug !== item.slug ? `/list/${item.slug}` : '/list'">
-      <div class="title">
-        {{ item.title }}
-      </div>
-      <div class="subtitlte">
-        {{ item.subTitle }}
-      </div>
+      <template v-if="route.params.slug === item.slug">
+        <h1 class="title">
+          {{ item.title }}
+        </h1>
+        <h1 class="subtitlte">
+          {{ item.subTitle }}
+        </h1>
+      </template>
+      <template v-else>
+        <div class="title">
+          {{ item.title }}
+        </div>
+        <div class="subtitlte">
+          {{ item.subTitle }}
+        </div>
+      </template>
     </RouterLink>
     <div class="info" v-if="route.params.slug === item.slug">
       <Image class="img" v-if="item?.image" :data="item?.image?.responsiveImage" />

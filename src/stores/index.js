@@ -231,6 +231,16 @@ export const useApiStore = defineStore('apiCalls', () => {
           value
         }
       }
+    }`,
+    credit: `
+    {
+      credit {
+        text {
+          blocks
+          links
+          value
+        }
+      }
     }`
   }
 
