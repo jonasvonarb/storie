@@ -11,10 +11,10 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "@unhead/vue": "^1.11.9",
+    "@unhead/vue": "^2.1.12",
     "datocms-structured-text-to-html-string": "^4.0.1",
     "pinia": "^2.1.7",
-    "unhead": "^1.11.9",
+    "unhead": "^2.1.12",
     "vite-plugin-html": "^3.2.2",
     "vue": "^3.4.29",
     "vue-datocms": "^7.0.5",
@@ -22,13 +22,13 @@
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.8.0",
-    "@vitejs/plugin-vue": "^5.0.5",
+    "@vitejs/plugin-vue": "^5.2.4",
     "@vue/eslint-config-prettier": "^9.0.0",
     "eslint": "^8.57.0",
     "eslint-plugin-vue": "^9.23.0",
     "prettier": "^3.2.5",
     "stylus": "^0.63.0",
     "stylus-loader": "^8.1.1",
-    "vite": "^5.3.1"
+    "vite": "^6.4.1"
   }
 }
