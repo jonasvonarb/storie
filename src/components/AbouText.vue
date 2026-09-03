@@ -3,6 +3,8 @@
     <div v-html="responses?.about?.[0]?.about?.aboutText" />
     <br />
     <RouterLink to="/privacy">Datenschutz</RouterLink>
+    <br />
+    <RouterLink to="/credits">Bildnachweise</RouterLink>
   </div>
 </template>
 

@@ -194,7 +194,6 @@ export const useApiStore = defineStore('apiCalls', () => {
         id
         name
         lastname
-        eMail
         slug
         text (markdown: true)
         image {
@@ -225,6 +224,16 @@ export const useApiStore = defineStore('apiCalls', () => {
     privacy: `
     {
       privacy {
+        text {
+          blocks
+          links
+          value
+        }
+      }
+    }`,
+    credit: `
+    {
+      credit {
         text {
           blocks
           links

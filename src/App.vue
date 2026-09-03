@@ -15,6 +15,10 @@ const route = useRoute()
 <template>
   <Header />
   <main class="containerMain">
+    <h1 v-if="!route?.params?.slug" class="hidden-h1">
+      Storie beratet, organisiert und setzt um. Wir erarbeiten Lösungen. Kreativ und pragmatisch,
+      auf Augenhöhe mit unseren Projektpartnerinnen.
+    </h1>
     <div class="leftWrapper">
       <FilterMenu
         v-if="
@@ -42,6 +46,17 @@ const route = useRoute()
     padding-top calc(1rem + var(--header-height))
     width calc(100vw - var(--containert-width))
 
+.hidden-h1
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
 
 
 @media (max-width: 767px)

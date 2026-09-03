@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <h2>Datenschutz</h2>
-    <div class="text" v-html="render(responses?.privacy?.[0]?.privacy?.text?.value)"></div>
+    <h2>Bildnachweise</h2>
+    <div class="text" v-html="render(responses?.credit?.[0]?.credit?.text?.value)"></div>
   </div>
 </template>
 
@@ -14,11 +14,11 @@ import { render } from 'datocms-structured-text-to-html-string'
 const { call, responses } = useApiStore()
 
 useHead({
-  title: 'Datenschutz – Storie'
+  title: 'Bildnachweise – Storie'
 })
 
 onMounted(() => {
-  call('privacy')
+  call('credit')
 })
 </script>
 <style lang="stylus" scoped>
