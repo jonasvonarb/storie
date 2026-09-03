@@ -64,10 +64,11 @@ const route = useRoute()
     margin-top var(--header-height)
     position initial
     flex-direction column-reverse
-    margin-bottom 50vh
+    margin-bottom 40vh
     .leftWrapper
       position initial
       width 100vw
+      height auto
       padding-top 2rem
       padding-bottom 2rem
 </style>
