@@ -194,7 +194,6 @@ export const useApiStore = defineStore('apiCalls', () => {
         id
         name
         lastname
-        eMail
         slug
         text (markdown: true)
         image {
